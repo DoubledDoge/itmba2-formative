@@ -1,3 +1,17 @@
 <resources>
-    <string name="app_name">itmba2-formative</string>
+    <string name="app_name">itmba2_formative</string>
+
+    <!-- TripBuddy Welcome Screen -->
+    <string name="app_name_display">TripBuddy</string>
+    <string name="tripbuddy_logo">TripBuddy Logo</string>
+    <string name="welcome_message">Your ultimate travel companion for creating memories and planning adventures</string>
+    <string name="app_tagline">Document • Plan • Explore</string>
+    <string name="get_started">Start Your Journey</string>
+    <string name="already_have_account">Already have an account? Sign in</string>
+
+    <!-- Feature Descriptions -->
+    <string name="memories_feature">Create Memories</string>
+    <string name="planning_feature">Plan Trips</string>
+    <string name="budget_feature">Budget Calculator</string>
+    <string name="rewards_feature">Loyalty Rewards</string>
 </resources>
