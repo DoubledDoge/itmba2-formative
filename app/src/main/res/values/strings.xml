@@ -1,12 +1,13 @@
 <resources>
     <string name="app_name">TripBuddy Travel App</string>
 
-    <!-- Welcome Strings -->
+    <!-- TripBuddy Welcome Screen -->
     <string name="app_name_display">TripBuddy</string>
     <string name="tripbuddy_logo">TripBuddy Logo</string>
     <string name="welcome_message">Your ultimate travel companion for creating memories and planning adventures</string>
     <string name="app_tagline">Document • Plan • Explore</string>
     <string name="get_started">Start Your Journey</string>
+    <string name="already_have_account">Already have an account? Sign in</string>
 
     <!-- Feature Descriptions -->
     <string name="memories_feature">Create Memories</string>
@@ -43,4 +44,40 @@
     <string name="password_icon_desc">Password icon</string>
     <string name="confirm_password_icon_desc">Confirm password icon</string>
     <string name="user_icon_desc">User icon</string>
+
+    <!-- Home Screen Strings -->
+    <string name="welcome_back_user">Welcome back,</string>
+    <string name="default_user_name">Traveler</string>
+    <string name="ready_for_adventure">Ready for your next adventure?</string>
+    <string name="profile_settings">Profile and Settings</string>
+
+    <!-- TES Score Section -->
+    <string name="tes_title">TripBuddy Engagement Score</string>
+    <string name="default_tes_score">0</string>
+    <string name="tes_subtitle">Points earned from your adventures</string>
+    <string name="tes_icon_desc">TES Score Star Icon</string>
+
+    <!-- Feature Navigation -->
+    <string name="explore_features">Explore Features</string>
+    <string name="create_memories">Create Memories</string>
+    <string name="memories_desc">Capture your journey</string>
+    <string name="view_gallery">View Gallery</string>
+    <string name="gallery_desc">Browse your adventures</string>
+    <string name="plan_budget">Plan &amp; Budget</string>
+    <string name="budget_desc">Organize your next trip</string>
+    <string name="debug_database">Database Debug</string>
+    <string name="database_desc">Development tools</string>
+
+    <!-- Quick Actions -->
+    <string name="quick_actions">Quick Actions</string>
+    <string name="quick_memory">+ Add Memory</string>
+    <string name="quick_trip">+ Plan Trip</string>
+
+    <!-- Additional Icons -->
+    <string name="icon_gallery">🖼️</string>
+    <string name="icon_database">🗃️</string>
+
+    <!-- Feature Descriptions for Content Description -->
+    <string name="gallery_feature">Gallery View</string>
+    <string name="database_feature">Database Debug</string>
 </resources>

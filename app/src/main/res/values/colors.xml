@@ -1,14 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Default Colors -->
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- Primary Brand Colors -->
+    <color name="primary_color">#2196F3</color>        <!-- TripBuddy Blue -->
+    <color name="accent_color">#FFC107</color>          <!-- TripBuddy Gold/Yellow -->
+    <color name="secondary_color">#4CAF50</color>       <!-- Success Green -->
 
-    <!-- TripBuddy Brand Colors -->
-    <color name="primary_color">#FF6B35</color>
-    <color name="accent_color">#FFD23F</color>
-    <color name="overlay_color">#80000000</color>
-    <color name="white_90">#E6FFFFFF</color>
-    <color name="white_80">#CCFFFFFF</color>
-    <color name="white_20">#33FFFFFF</color>
+    <!-- Background Colors -->
+    <color name="overlay_color">#80000000</color>       <!-- Semi-transparent black overlay -->
+    <color name="card_background">#33FFFFFF</color>     <!-- Semi-transparent white for cards -->
+    <color name="debug_color">#FF5722</color>           <!-- Debug/Development orange-red -->
+
+    <!-- Text Colors -->
+    <color name="white">#FFFFFF</color>
+    <color name="white_90">#E6FFFFFF</color>            <!-- 90% white -->
+    <color name="white_80">#CCFFFFFF</color>            <!-- 80% white -->
+    <color name="white_20">#33FFFFFF</color>            <!-- 20% white for ripples -->
+    <color name="black">#000000</color>
+
+    <!-- Status Colors -->
+    <color name="error_color">#F44336</color>
+    <color name="warning_color">#FF9800</color>
+    <color name="info_color">#2196F3</color>
+    <color name="success_color">#4CAF50</color>
+
+    <!-- Gradient Colors (for drawable backgrounds) -->
+    <color name="gradient_start">#1976D2</color>        <!-- Deep blue -->
+    <color name="gradient_middle">#2196F3</color>       <!-- Primary blue -->
+    <color name="gradient_end">#42A5F5</color>          <!-- Light blue -->
 </resources>
