@@ -49,7 +49,7 @@ public class AuthActivity extends BaseActivity {
             // navigateToHome();
         });
 
-        // Optional: Add double-tap to toggle system UI for testing
+        // Add double-tap to toggle system UI for testing
         findViewById(R.id.iv_auth_logo).setOnClickListener(v -> {
             toggleSystemUI();
         });
@@ -67,7 +67,7 @@ public class AuthActivity extends BaseActivity {
             btnSecondaryAction.setText(getString(R.string.create_account_button));
         } else {
             // Switch to Registration Mode
-            tvWelcomeBack.setText("Join the TripBuddy community");
+            tvWelcomeBack.setText(R.string.join_message);
             tilConfirmPassword.setVisibility(View.VISIBLE);
             tilFullName.setVisibility(View.VISIBLE);
             btnPrimaryAction.setText(getString(R.string.register_button));

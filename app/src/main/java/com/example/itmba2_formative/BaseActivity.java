@@ -8,6 +8,13 @@ import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.core.view.WindowInsetsControllerCompat;
 
+/**
+    Note: This BaseActivity has nothing to do with what the assignment requires. It is only there to make the app more immersive and 'premium'.
+    It is not required to use this BaseActivity, but it is recommended for this reasoning.
+    Warning: Very complex terminology and code here, which I tried best as I could to simplify.
+ */
+
+
 public abstract class BaseActivity extends AppCompatActivity {
 
     private WindowInsetsControllerCompat windowInsetsController;
@@ -40,7 +47,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             );
         }
 
-        // Additional flags for older API levels
+        // Additional flags for older API levels and compatibility
         getWindow().setFlags(
                 WindowManager.LayoutParams.FLAG_FULLSCREEN |
                         WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,

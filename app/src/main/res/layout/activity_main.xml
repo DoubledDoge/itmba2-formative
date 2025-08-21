@@ -19,18 +19,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- TripBuddy Logo -->
-    <ImageView
-        android:id="@+id/iv_logo"
+    <!-- TripBuddy Logo with circular shape -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_logo"
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_marginTop="120dp"
-        android:contentDescription="@string/tripbuddy_logo"
-        android:src="@drawable/ic_tripbuddy_logo"
-        android:scaleType="centerCrop"
+        app:cardCornerRadius="60dp"
+        app:cardElevation="0dp"
+        app:strokeWidth="3dp"
+        app:strokeColor="@color/primary_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/tripbuddy_logo"
+            android:src="@drawable/ic_tripbuddy_logo"
+            android:scaleType="centerCrop" />
+
+    </androidx.cardview.widget.CardView>
 
     <!-- App Name -->
     <TextView
@@ -45,7 +56,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_logo" />
+        app:layout_constraintTop_toBottomOf="@+id/cv_logo" />
 
     <!-- Welcome Message -->
     <TextView
@@ -83,29 +94,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_welcome_message" />
 
-    <!-- Get Started Button -->
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_get_started"
-        android:layout_width="0dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginEnd="48dp"
-        android:layout_marginBottom="80dp"
-        android:backgroundTint="@color/primary_color"
-        android:fontFamily="sans-serif-medium"
-        android:text="@string/get_started"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:cornerRadius="28dp"
-        app:elevation="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:rippleColor="@color/white_20" />
-
-
-    <!-- Feature Preview Icons -->
+    <!-- Feature Preview Icons with proper descriptions -->
     <LinearLayout
         android:id="@+id/ll_feature_icons"
         android:layout_width="wrap_content"
@@ -121,7 +110,7 @@
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_marginEnd="16dp"
-            android:text="📷"
+            android:text="@string/icon_camera"
             android:textSize="24sp"
             android:gravity="center"
             android:contentDescription="@string/memories_feature" />
@@ -130,7 +119,7 @@
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_marginEnd="16dp"
-            android:text="🗺️"
+            android:text="@string/icon_map"
             android:textSize="24sp"
             android:gravity="center"
             android:contentDescription="@string/planning_feature" />
@@ -139,7 +128,7 @@
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_marginEnd="16dp"
-            android:text="💰"
+            android:text="@string/icon_money"
             android:textSize="24sp"
             android:gravity="center"
             android:contentDescription="@string/budget_feature" />
@@ -147,11 +136,33 @@
         <TextView
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:text="⭐"
+            android:text="@string/icon_star"
             android:textSize="24sp"
             android:gravity="center"
             android:contentDescription="@string/rewards_feature" />
 
     </LinearLayout>
+
+    <!-- Get Started Button with width constraint -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_get_started"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="80dp"
+        android:maxWidth="320dp"
+        android:backgroundTint="@color/primary_color"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/get_started"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:cornerRadius="28dp"
+        app:elevation="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:rippleColor="@color/white_20" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

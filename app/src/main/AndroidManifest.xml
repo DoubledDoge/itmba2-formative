@@ -11,6 +11,8 @@
         android:roundIcon="@mipmap/ic_tripbuddy_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.Itmba2formative">
+
+        <!-- Main activity -->
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -21,6 +23,8 @@
             </intent-filter>
         </activity>
 
+
+        <!-- Other activities -->
         <activity
             android:name=".AuthActivity"
             android:exported="false" />

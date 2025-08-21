@@ -1,13 +1,12 @@
 <resources>
-    <string name="app_name">itmba2_formative</string>
+    <string name="app_name">TripBuddy Travel App</string>
 
-    <!-- TripBuddy Welcome Screen -->
+    <!-- Welcome Strings -->
     <string name="app_name_display">TripBuddy</string>
     <string name="tripbuddy_logo">TripBuddy Logo</string>
     <string name="welcome_message">Your ultimate travel companion for creating memories and planning adventures</string>
     <string name="app_tagline">Document • Plan • Explore</string>
     <string name="get_started">Start Your Journey</string>
-    <string name="already_have_account">Already have an account? Sign in</string>
 
     <!-- Feature Descriptions -->
     <string name="memories_feature">Create Memories</string>
@@ -27,4 +26,21 @@
     <string name="switch_to_login">Already have an account? Sign In</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="back_to_welcome">← Back to Welcome</string>
+    <string name="join_message">Join the TripBuddy community</string>
+
+    <!-- Emoji Icons as String Resources -->
+    <string name="icon_email">📧</string>
+    <string name="icon_password">🔒</string>
+    <string name="icon_confirm_password">🔑</string>
+    <string name="icon_user">👤</string>
+    <string name="icon_camera">📷</string>
+    <string name="icon_map">🗺️</string>
+    <string name="icon_money">💰</string>
+    <string name="icon_star">⭐</string>
+
+    <!-- Content Descriptions for Accessibility -->
+    <string name="email_icon_desc">Email icon</string>
+    <string name="password_icon_desc">Password icon</string>
+    <string name="confirm_password_icon_desc">Confirm password icon</string>
+    <string name="user_icon_desc">User icon</string>
 </resources>

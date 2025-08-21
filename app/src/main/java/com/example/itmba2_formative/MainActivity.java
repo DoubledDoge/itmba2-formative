@@ -20,10 +20,10 @@ public class MainActivity extends BaseActivity {
             return insets;
         });
 
-        setupClickListeners();
+        setupClickListener();
     }
 
-    private void setupClickListeners() {
+    private void setupClickListener() {
         findViewById(R.id.btn_get_started).setOnClickListener(button -> {
             Intent intent = new Intent(MainActivity.this, AuthActivity.class);
             startActivity(intent);
