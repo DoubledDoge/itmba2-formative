@@ -14,4 +14,17 @@
     <string name="planning_feature">Plan Trips</string>
     <string name="budget_feature">Budget Calculator</string>
     <string name="rewards_feature">Loyalty Rewards</string>
+
+    <!-- Authentication Strings -->
+    <string name="welcome_back">Ready for your next adventure?</string>
+    <string name="email_hint">Email Address</string>
+    <string name="password_hint">Password</string>
+    <string name="confirm_password_hint">Confirm Password</string>
+    <string name="full_name_hint">Full Name</string>
+    <string name="login_button">Sign In</string>
+    <string name="create_account_button">Create New Account</string>
+    <string name="register_button">Create Account</string>
+    <string name="switch_to_login">Already have an account? Sign In</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="back_to_welcome">← Back to Welcome</string>
 </resources>
