@@ -27,6 +27,7 @@
         android:layout_marginTop="60dp"
         android:contentDescription="@string/tripbuddy_logo"
         android:src="@drawable/ic_tripbuddy_logo"
+        android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -123,7 +124,7 @@
             <TextView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:text="🔒"
+                android:text="🔐"
                 android:textSize="20sp"
                 android:gravity="center" />
 
@@ -166,7 +167,7 @@
             <TextView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:text="🔐"
+                android:text="🔒"
                 android:textSize="20sp"
                 android:gravity="center" />
 

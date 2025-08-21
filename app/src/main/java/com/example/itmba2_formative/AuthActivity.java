@@ -4,13 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
 
-public class AuthActivity extends AppCompatActivity {
+public class AuthActivity extends BaseActivity {
 
     private boolean isLoginMode = true;
 
@@ -50,6 +47,11 @@ public class AuthActivity extends AppCompatActivity {
             // TODO: Implement authentication logic
             // For now, just navigate to home (placeholder)
             // navigateToHome();
+        });
+
+        // Optional: Add double-tap to toggle system UI for testing
+        findViewById(R.id.iv_auth_logo).setOnClickListener(v -> {
+            toggleSystemUI();
         });
     }
 
