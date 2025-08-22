@@ -35,6 +35,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
+                android:paddingStart="16dp"
                 android:paddingEnd="16dp">
 
                 <!-- Logo and App Name -->
@@ -67,19 +68,17 @@
                     android:textStyle="bold" />
 
                 <!-- Profile/Settings Icon -->
-                <ImageView
-                    android:id="@+id/iv_profile"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
+                <TextView
+                    android:id="@+id/tv_profile"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:clickable="true"
                     android:focusable="true"
-                    android:minWidth="48dp"
-                    android:minHeight="48dp"
-                    android:padding="8dp"
-                    android:src="@drawable/ic_person"
-                    android:contentDescription="@string/profile_settings"
-                    app:tint="@color/white_90" />
+                    android:text="@string/icon_preferences"
+                    android:textSize="24sp"
+                    android:gravity="center"
+                    android:contentDescription="@string/profile_settings" />
 
             </LinearLayout>
 
@@ -275,7 +274,7 @@
                             android:layout_marginTop="4dp"
                             android:fontFamily="sans-serif"
                             android:text="@string/memories_desc"
-                            android:textColor="@color/white_80"
+                            android:textColor="@color/white"
                             android:textSize="12sp"
                             android:gravity="center" />
 
@@ -329,7 +328,7 @@
                             android:layout_marginTop="4dp"
                             android:fontFamily="sans-serif"
                             android:text="@string/gallery_desc"
-                            android:textColor="@color/white_80"
+                            android:textColor="@color/white"
                             android:textSize="12sp"
                             android:gravity="center" />
 
@@ -392,7 +391,7 @@
                             android:layout_marginTop="4dp"
                             android:fontFamily="sans-serif"
                             android:text="@string/budget_desc"
-                            android:textColor="@color/white_80"
+                            android:textColor="@color/white"
                             android:textSize="12sp"
                             android:gravity="center" />
 
@@ -482,7 +481,7 @@
                     android:layout_height="48dp"
                     android:layout_weight="1"
                     android:layout_marginEnd="8dp"
-                    android:maxWidth="160dp"
+                    android:maxWidth="150dp"
                     android:backgroundTint="@color/accent_color"
                     android:fontFamily="sans-serif-medium"
                     android:text="@string/quick_memory"
@@ -500,7 +499,7 @@
                     android:layout_height="48dp"
                     android:layout_weight="1"
                     android:layout_marginStart="8dp"
-                    android:maxWidth="160dp"
+                    android:maxWidth="150dp"
                     android:backgroundTint="@android:color/transparent"
                     android:fontFamily="sans-serif-medium"
                     android:text="@string/quick_trip"

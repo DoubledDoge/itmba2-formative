@@ -29,7 +29,7 @@
     <string name="back_to_welcome">← Back to Welcome</string>
     <string name="join_message">Join the TripBuddy community</string>
 
-    <!-- Emoji Icons as String Resources -->
+    <!-- Emoji Icons  -->
     <string name="icon_email">📧</string>
     <string name="icon_password">🔒</string>
     <string name="icon_confirm_password">🔑</string>
@@ -38,8 +38,11 @@
     <string name="icon_map">🗺️</string>
     <string name="icon_money">💰</string>
     <string name="icon_star">⭐</string>
+    <string name="icon_gallery">🖼️</string>
+    <string name="icon_database">🗃️</string>
+    <string name="icon_preferences">⚙️</string>
 
-    <!-- Content Descriptions for Accessibility -->
+    <!-- Accessibility descriptions -->
     <string name="email_icon_desc">Email icon</string>
     <string name="password_icon_desc">Password icon</string>
     <string name="confirm_password_icon_desc">Confirm password icon</string>
@@ -73,11 +76,7 @@
     <string name="quick_memory">+ Add Memory</string>
     <string name="quick_trip">+ Plan Trip</string>
 
-    <!-- Additional Icons -->
-    <string name="icon_gallery">🖼️</string>
-    <string name="icon_database">🗃️</string>
-
-    <!-- Feature Descriptions for Content Description -->
+    <!-- Feature Descriptions  -->
     <string name="gallery_feature">Gallery View</string>
     <string name="database_feature">Database Debug</string>
 </resources>
