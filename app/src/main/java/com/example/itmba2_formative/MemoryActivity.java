@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import android.content.SharedPreferences;
 import androidx.activity.OnBackPressedCallback;
@@ -204,15 +205,7 @@ public class MemoryActivity extends BaseActivity {
     }
 
     private boolean checkAndRequestPermissions() {
-        List<String> permissions = new ArrayList<>();
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            // Android 13+ uses more granular permissions
-            permissions.add(Manifest.permission.READ_MEDIA_IMAGES);
-        } else {
-            // For Android 12 and below
-            permissions.add(Manifest.permission.READ_EXTERNAL_STORAGE);
-        }
+        List<String> permissions = getStrings();
 
         List<String> permissionsToRequest = new ArrayList<>();
         for (String permission : permissions) {
@@ -229,19 +222,39 @@ public class MemoryActivity extends BaseActivity {
         return true;
     }
 
+    @NonNull
+    private static List<String> getStrings() {
+        List<String> permissions = new ArrayList<>();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            // Android 13+ uses more granular permissions
+            permissions.add(Manifest.permission.READ_MEDIA_IMAGES);
+            permissions.add(Manifest.permission.READ_MEDIA_AUDIO); // Added for music
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) { // Android 14+
+                permissions.add(Manifest.permission.READ_MEDIA_VISUAL_USER_SELECTED);
+            }
+        } else {
+            // For Android 12 and below
+            permissions.add(Manifest.permission.READ_EXTERNAL_STORAGE);
+        }
+        return permissions;
+    }
+
     private void launchPhotoPicker() {
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.setType("image/*");
-        intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
         pickPhotoLauncher.launch(intent);
     }
 
     private void launchMusicPicker() {
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.setType("audio/*");
-        intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
         pickMusicLauncher.launch(intent);
     }
 
@@ -261,8 +274,7 @@ public class MemoryActivity extends BaseActivity {
         });
 
         // Get track metadata and album art
-        MediaMetadataRetriever retriever = new MediaMetadataRetriever();
-        try {
+        try (MediaMetadataRetriever retriever = new MediaMetadataRetriever()) {
             retriever.setDataSource(this, musicUri);
 
             // Get track title and artist from metadata
@@ -287,12 +299,6 @@ public class MemoryActivity extends BaseActivity {
             tvTrackTitle.setText(musicUri.getLastPathSegment());
             tvTrackArtist.setText(R.string.unknown_artist);
             ivAlbumArt.setImageResource(R.color.primary_color);
-        } finally {
-            try {
-                retriever.release();
-            } catch (Exception e) {
-                // Ignore release errors
-            }
         }
     }
 
@@ -372,10 +378,12 @@ public class MemoryActivity extends BaseActivity {
         // Take persistent permissions for photo URI
         if (memory.getPhotoUri() != null) {
             try {
+                // Ensure the correct flags are used, primarily FLAG_GRANT_READ_URI_PERMISSION
+                // as persistable permission should have been granted by ACTION_OPEN_DOCUMENT.
                 final int takeFlags = Intent.FLAG_GRANT_READ_URI_PERMISSION;
                 getContentResolver().takePersistableUriPermission(memory.getPhotoUri(), takeFlags);
             } catch (SecurityException e) {
-                showToast(getString(R.string.permission_denied));
+                showToast(getString(R.string.permission_denied_photo_uri) + ": " + e.getMessage());
                 return false;
             }
         }
@@ -383,10 +391,11 @@ public class MemoryActivity extends BaseActivity {
         // Take persistent permissions for music URI
         if (memory.getMusicUri() != null) {
             try {
+                 // Ensure the correct flags are used, primarily FLAG_GRANT_READ_URI_PERMISSION
                 final int takeFlags = Intent.FLAG_GRANT_READ_URI_PERMISSION;
                 getContentResolver().takePersistableUriPermission(memory.getMusicUri(), takeFlags);
             } catch (SecurityException e) {
-                showToast(getString(R.string.permission_denied));
+                showToast(getString(R.string.permission_denied_music_uri) + ": " + e.getMessage());
                 return false;
             }
         }

@@ -141,5 +141,6 @@
     <string name="database_error">Database error occurred</string>
     <string name="save_error">Error saving data</string>
     <string name="load_error">Error loading data</string>
-    <string name="permission_denied">Permission denied</string>
+    <string name="permission_denied_photo_uri">Permission denied for photo. Please select the photo again.</string>
+    <string name="permission_denied_music_uri">Permission denied for music. Please select the music track again.</string>
 </resources>
