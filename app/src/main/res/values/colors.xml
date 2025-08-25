@@ -8,6 +8,7 @@
     <color name="overlay_color">#80000000</color>       <!-- Semi-transparent black overlay -->
     <color name="card_background">#33FFFFFF</color>     <!-- Semi-transparent white for cards -->
     <color name="debug_color">#FF5722</color>           <!-- Debug/Development orange-red -->
+    <color name="app_bar_color">#B0681C</color>
 
     <!-- Text Colors -->
     <color name="white">#FFFFFF</color>

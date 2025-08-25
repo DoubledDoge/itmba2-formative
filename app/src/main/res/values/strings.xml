@@ -1,35 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">TripBuddy Travel App</string>
-
-    <!-- TripBuddy Welcome Screen -->
-    <string name="app_name_display">TripBuddy</string>
-    <string name="tripbuddy_logo">TripBuddy Logo</string>
-    <string name="welcome_message">Your ultimate travel companion for creating memories and planning adventures</string>
+    <!-- App Information -->
+    <string name="app_name">TripBuddy</string>
     <string name="app_tagline">Document • Plan • Explore</string>
+
+    <!-- Welcome Screen -->
+    <string name="welcome_message">Your ultimate travel companion for creating memories and planning adventures</string>
     <string name="get_started">Start Your Journey</string>
-    <string name="already_have_account">Already have an account? Sign in</string>
-
-    <!-- Feature Descriptions -->
-    <string name="memories_feature">Create Memories</string>
-    <string name="planning_feature">Plan Trips</string>
-    <string name="budget_feature">Budget Calculator</string>
-    <string name="rewards_feature">Loyalty Rewards</string>
-
-    <!-- Authentication Strings -->
+    <string name="back_to_welcome">← Back to Welcome</string>
+    <string name="welcome_back_user">Welcome back,</string>
     <string name="welcome_back">Ready for your next adventure?</string>
+    <string name="default_user_name">Adventurer</string>
+
+    <!-- Features -->
+    <string name="explore_features">Explore Features</string>
+    <!-- Memory Feature -->
+    <string name="memories_feature">Create Memories</string>
+    <string name="memories_desc">Capture your moments</string>
+    <string name="memory_details">Memory Details</string>
+    <string name="memory_title">Title your memory</string>
+    <string name="memory_description">Describe your experience</string>
+    <string name="memory_photo">Memory Photo</string>
+    <string name="add_photo">Add a Photo</string>
+    <string name="capture_moment">Capture this moment</string>
+    <string name="retake_photo">Retake photo</string>
+    <string name="remove_photo">Remove photo</string>
+    <string name="quick_memory">Quick Memory</string>
+    <!-- Gallery Feature -->
+    <string name="gallery_feature">View Gallery</string>
+    <string name="gallery_desc">Browse travel photos</string>
+    <string name="album_art">Album Art</string>
+    <!-- Budget Feature -->
+    <string name="planning_feature">Plan Trip</string>
+    <string name="budget_desc">Decide your adventure</string>
+    <!-- Trip Planning -->
+    <string name="location">Location</string>
+    <string name="use_current_location">Use current location</string>
+
+    <!-- Database Feature -->
+    <string name="database_feature">Database</string>
+    <string name="debug_database">Debug Database</string>
+    <string name="database_desc">View and manage data</string>
+
+    <!-- TES Feature -->
+    <string name="rewards_feature">Loyalty Rewards</string>
+    <string name="tes_title">Travel Experience Score</string>
+    <string name="tes_subtitle">Keep traveling to increase your score!</string>
+    <string name="default_tes_score">127</string>
+    <string name="tes_icon_desc">TES Score Icon</string>
+
+    <!-- Authentication -->
+    <string name="auth_action_login">Sign In</string>
+    <string name="auth_action_register">Create Account</string>
+    <string name="auth_switch_to_login">Already have an account? Sign in</string>
+    <string name="join_message">Join the TripBuddy community</string>
+    <string name="forgot_password">Forgot Password?</string>
+
+    <!-- Form Fields -->
     <string name="email_hint">Email Address</string>
     <string name="password_hint">Password</string>
     <string name="confirm_password_hint">Confirm Password</string>
     <string name="full_name_hint">Full Name</string>
-    <string name="login_button">Sign In</string>
-    <string name="create_account_button">Create New Account</string>
-    <string name="register_button">Create Account</string>
-    <string name="switch_to_login">Already have an account? Sign In</string>
-    <string name="forgot_password">Forgot Password?</string>
-    <string name="back_to_welcome">← Back to Welcome</string>
-    <string name="join_message">Join the TripBuddy community</string>
 
-    <!-- Emoji Icons  -->
+    <!-- Icons -->
     <string name="icon_email">📧</string>
     <string name="icon_password">🔒</string>
     <string name="icon_confirm_password">🔑</string>
@@ -41,42 +74,72 @@
     <string name="icon_gallery">🖼️</string>
     <string name="icon_database">🗃️</string>
     <string name="icon_preferences">⚙️</string>
+    <string name="icon_music">🎵</string>
+    <string name="icon_music2">🎶</string>
+    <string name="back_icon">←</string>
+    <string name="checkmark_icon">✓</string>
+    <string name="play_icon">▶</string>
+    <string name="pause_icon">⏸</string>
+    <string name="remove_track_icon">❌</string>
+    <string name="retry_icon">🔄</string>
+    <string name="bin_icon">🗑️</string>
+    <string name="stop_music_icon">⏹</string>
 
-    <!-- Accessibility descriptions -->
-    <string name="email_icon_desc">Email icon</string>
-    <string name="password_icon_desc">Password icon</string>
-    <string name="confirm_password_icon_desc">Confirm password icon</string>
-    <string name="user_icon_desc">User icon</string>
+    <!-- Action Buttons -->
+    <string name="save_memory">Save Memory</string>
+    <string name="save_draft">Save as Draft</string>
+    <string name="profile_settings">Profile Settings</string>
+    <string name="play_music">Play Music</string>
+    <string name="pause_music">Pause Music</string>
+    <string name="stop_music">Stop Music</string>
+    <string name="remove_track">Remove Track</string>
+    <string name="create">Create</string>
 
-    <!-- Home Screen Strings -->
-    <string name="welcome_back_user">Welcome back,</string>
-    <string name="default_user_name">Traveler</string>
-    <string name="ready_for_adventure">Ready for your next adventure?</string>
-    <string name="profile_settings">Profile and Settings</string>
+    <!-- Music Related -->
+    <string name="memory_soundtrack">Memory Soundtrack</string>
+    <string name="add_track">Add a Track</string>
+    <string name="choose_library">Choose from your library</string>
+    <string name="track_title">Track Title</string>
+    <string name="artist_name">Artist Name</string>
+    <string name="unknown_artist">Unknown Artist</string>
 
-    <!-- TES Score Section -->
-    <string name="tes_title">TripBuddy Engagement Score</string>
-    <string name="default_tes_score">0</string>
-    <string name="tes_subtitle">Points earned from your adventures</string>
-    <string name="tes_icon_desc">TES Score Star Icon</string>
+    <!-- Gallery Related -->
+    <string name="gallery_image">Gallery Image</string>
 
-    <!-- Feature Navigation -->
-    <string name="explore_features">Explore Features</string>
-    <string name="create_memories">Create Memories</string>
-    <string name="memories_desc">Capture your journey</string>
-    <string name="view_gallery">View Gallery</string>
-    <string name="gallery_desc">Browse your adventures</string>
-    <string name="plan_budget">Plan &amp; Budget</string>
-    <string name="budget_desc">Organize your next trip</string>
-    <string name="debug_database">Database Debug</string>
-    <string name="database_desc">Development tools</string>
+    <!-- Accessibility Descriptions -->
+    <string name="email_icon_desc">Email Icon</string>
+    <string name="password_icon_desc">Password Icon</string>
+    <string name="confirm_password_icon_desc">Confirm Password Icon</string>
+    <string name="user_icon_desc">User Icon</string>
+    <string name="back_to_home">Back to Home</string>
 
-    <!-- Quick Actions -->
-    <string name="quick_actions">Quick Actions</string>
-    <string name="quick_memory">+ Add Memory</string>
-    <string name="quick_trip">+ Plan Trip</string>
+    <!-- Memory Creation -->
+    <string name="title_required">Title is required</string>
+    <string name="photo_required">Please add a photo to your memory</string>
+    <string name="save_failed">Failed to save memory</string>
+    <string name="save_success">Memory created successfully</string>
+    <string name="save_draft_success">Memory saved as draft</string>
+    <string name="unsaved_changes">Unsaved Changes</string>
+    <string name="save_draft_prompt">Would you like to save your changes as a draft?</string>
+    <string name="action_discard">Discard</string>
+    <string name="action_cancel">Cancel</string>
 
-    <!-- Feature Descriptions  -->
-    <string name="gallery_feature">Gallery View</string>
-    <string name="database_feature">Database Debug</string>
+    <!-- Success Messages -->
+    <string name="account_created">Account created successfully</string>
+    <string name="login_success">Logged in successfully</string>
+    <string name="logout_success">Logged out successfully</string>
+
+    <!-- Loading Messages -->
+    <string name="loading_login">Logging in…</string>
+    <string name="loading_register">Creating account…</string>
+    <string name="loading_memory">Saving memory…</string>
+    <string name="loading_gallery">Loading gallery…</string>
+
+    <!-- Error Messages -->
+    <string name="error_generic">An error occurred. Please try again.</string>
+    <string name="email_exists">Email already registered</string>
+    <string name="database_error">Database error occurred</string>
+    <string name="save_error">Error saving data</string>
+    <string name="load_error">Error loading data</string>
+    <string name="permission_denied">Permission denied</string>
 </resources>

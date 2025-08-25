@@ -15,57 +15,62 @@
         android:layout_height="match_parent"
         android:background="@color/overlay_color" />
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar_layout"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        app:elevation="0dp">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-        <!-- Custom Toolbar -->
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar_home"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@android:color/transparent"
-            app:layout_scrollFlags="scroll|enterAlways">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="24dp"
+            android:paddingTop="24dp"
+            android:paddingBottom="32dp">
 
+            <!-- Header Section -->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp">
+                android:layout_marginBottom="24dp">
 
                 <!-- Logo and App Name -->
-                <androidx.cardview.widget.CardView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    app:cardCornerRadius="20dp"
-                    app:cardElevation="0dp"
-                    app:strokeWidth="2dp"
-                    app:strokeColor="@color/primary_color">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:contentDescription="@string/tripbuddy_logo"
-                        android:src="@drawable/ic_tripbuddy_logo"
-                        android:scaleType="centerCrop" />
-
-                </androidx.cardview.widget.CardView>
-
-                <TextView
+                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_marginStart="12dp"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="@string/app_name_display"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="#40FFFFFF"
+                        android:alpha="0.9">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:contentDescription="@string/app_name"
+                            android:src="@drawable/ic_tripbuddy_logo"
+                            android:scaleType="centerCrop" />
+
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="@string/app_name"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
 
                 <!-- Profile/Settings Icon -->
                 <TextView
@@ -82,23 +87,6 @@
 
             </LinearLayout>
 
-        </com.google.android.material.appbar.MaterialToolbar>
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingHorizontal="24dp"
-            android:paddingTop="24dp"
-            android:paddingBottom="32dp">
 
             <!-- Welcome Back Section -->
             <LinearLayout
@@ -133,7 +121,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:fontFamily="sans-serif"
-                    android:text="@string/ready_for_adventure"
+                    android:text="@string/welcome_back"
                     android:textColor="@color/accent_color"
                     android:textSize="16sp"
                     android:textStyle="italic" />
@@ -141,18 +129,17 @@
             </LinearLayout>
 
             <!-- TES Score Card -->
-            <com.google.android.material.card.MaterialCardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/cv_tes_score"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="32dp"
                 android:clickable="true"
                 android:focusable="true"
-                app:cardBackgroundColor="@color/card_background"
+                app:cardBackgroundColor="#40FFFFFF"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="8dp"
-                app:strokeColor="@color/accent_color"
-                app:strokeWidth="1dp">
+                app:cardElevation="4dp"
+                android:alpha="0.9">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -208,7 +195,7 @@
 
                 </LinearLayout>
 
-            </com.google.android.material.card.MaterialCardView>
+            </androidx.cardview.widget.CardView>
 
             <!-- Main Features Grid -->
             <TextView
@@ -229,7 +216,7 @@
                 android:orientation="horizontal">
 
                 <!-- Memories Card -->
-                <com.google.android.material.card.MaterialCardView
+                <androidx.cardview.widget.CardView
                     android:id="@+id/cv_memories"
                     android:layout_width="0dp"
                     android:layout_height="140dp"
@@ -237,10 +224,10 @@
                     android:layout_marginEnd="8dp"
                     android:clickable="true"
                     android:focusable="true"
-                    app:cardBackgroundColor="@color/card_background"
+                    app:cardBackgroundColor="#40FFFFFF"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="6dp"
-                    app:rippleColor="@color/white_20">
+                    app:cardElevation="4dp"
+                    android:alpha="0.9">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -262,7 +249,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp"
                             android:fontFamily="sans-serif-medium"
-                            android:text="@string/create_memories"
+                            android:text="@string/memories_feature"
                             android:textColor="@color/white"
                             android:textSize="16sp"
                             android:textStyle="bold"
@@ -280,10 +267,10 @@
 
                     </LinearLayout>
 
-                </com.google.android.material.card.MaterialCardView>
+                </androidx.cardview.widget.CardView>
 
                 <!-- Gallery Card -->
-                <com.google.android.material.card.MaterialCardView
+                <androidx.cardview.widget.CardView
                     android:id="@+id/cv_gallery"
                     android:layout_width="0dp"
                     android:layout_height="140dp"
@@ -291,10 +278,10 @@
                     android:layout_marginStart="8dp"
                     android:clickable="true"
                     android:focusable="true"
-                    app:cardBackgroundColor="@color/card_background"
+                    app:cardBackgroundColor="#40FFFFFF"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="6dp"
-                    app:rippleColor="@color/white_20">
+                    app:cardElevation="4dp"
+                    android:alpha="0.9">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -316,7 +303,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp"
                             android:fontFamily="sans-serif-medium"
-                            android:text="@string/view_gallery"
+                            android:text="@string/gallery_feature"
                             android:textColor="@color/white"
                             android:textSize="16sp"
                             android:textStyle="bold"
@@ -334,7 +321,7 @@
 
                     </LinearLayout>
 
-                </com.google.android.material.card.MaterialCardView>
+                </androidx.cardview.widget.CardView>
 
             </LinearLayout>
 
@@ -346,7 +333,7 @@
                 android:orientation="horizontal">
 
                 <!-- Budget/Plan Trip Card -->
-                <com.google.android.material.card.MaterialCardView
+                <androidx.cardview.widget.CardView
                     android:id="@+id/cv_budget"
                     android:layout_width="0dp"
                     android:layout_height="140dp"
@@ -354,10 +341,10 @@
                     android:layout_marginEnd="8dp"
                     android:clickable="true"
                     android:focusable="true"
-                    app:cardBackgroundColor="@color/card_background"
+                    app:cardBackgroundColor="#40FFFFFF"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="6dp"
-                    app:rippleColor="@color/white_20">
+                    app:cardElevation="4dp"
+                    android:alpha="0.9">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -372,14 +359,14 @@
                             android:text="@string/icon_money"
                             android:textSize="32sp"
                             android:gravity="center"
-                            android:contentDescription="@string/budget_feature" />
+                            android:contentDescription="@string/planning_feature" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp"
                             android:fontFamily="sans-serif-medium"
-                            android:text="@string/plan_budget"
+                            android:text="@string/planning_feature"
                             android:textColor="@color/white"
                             android:textSize="16sp"
                             android:textStyle="bold"
@@ -397,10 +384,10 @@
 
                     </LinearLayout>
 
-                </com.google.android.material.card.MaterialCardView>
+                </androidx.cardview.widget.CardView>
 
                 <!-- Database Debug Card -->
-                <com.google.android.material.card.MaterialCardView
+                <androidx.cardview.widget.CardView
                     android:id="@+id/cv_database"
                     android:layout_width="0dp"
                     android:layout_height="140dp"
@@ -408,12 +395,10 @@
                     android:layout_marginStart="8dp"
                     android:clickable="true"
                     android:focusable="true"
-                    app:cardBackgroundColor="@color/card_background"
+                    app:cardBackgroundColor="#40FFFFFF"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="6dp"
-                    app:rippleColor="@color/white_20"
-                    app:strokeColor="@color/debug_color"
-                    app:strokeWidth="1dp">
+                    app:cardElevation="4dp"
+                    android:alpha="0.9">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -453,63 +438,7 @@
 
                     </LinearLayout>
 
-                </com.google.android.material.card.MaterialCardView>
-
-            </LinearLayout>
-
-            <!-- Quick Actions Section -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:fontFamily="sans-serif-medium"
-                android:text="@string/quick_actions"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <!-- Quick Action Buttons -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center">
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_quick_memory"
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:layout_weight="1"
-                    android:layout_marginEnd="8dp"
-                    android:maxWidth="150dp"
-                    android:backgroundTint="@color/accent_color"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="@string/quick_memory"
-                    android:textAllCaps="false"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    app:cornerRadius="24dp"
-                    app:elevation="4dp"
-                    app:rippleColor="@color/white_20" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_quick_trip"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:layout_weight="1"
-                    android:layout_marginStart="8dp"
-                    android:maxWidth="150dp"
-                    android:backgroundTint="@android:color/transparent"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="@string/quick_trip"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textSize="14sp"
-                    app:cornerRadius="24dp"
-                    app:rippleColor="@color/white_20"
-                    app:strokeColor="@color/white"
-                    app:strokeWidth="1dp" />
+                </androidx.cardview.widget.CardView>
 
             </LinearLayout>
 

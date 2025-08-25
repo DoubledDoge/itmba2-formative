@@ -1,47 +1,65 @@
 package com.example.itmba2_formative;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
-import androidx.appcompat.app.AppCompatActivity;
-import com.google.android.material.button.MaterialButton;
-import com.google.android.material.card.MaterialCardView;
+import androidx.appcompat.app.AlertDialog;
+import androidx.cardview.widget.CardView;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
-public class HomeActivity extends AppCompatActivity {
+import com.example.itmba2_formative.models.User;
+
+public class HomeActivity extends BaseActivity {
 
     // UI Components
     private TextView tvUserName, tvTesScore, tvProfile;
-    private MaterialCardView cvMemories,  cvGallery, cvBudget, cvDatabase, cvTesScore;
-    private MaterialButton btnQuickMemory, btnQuickTrip;
+    private CardView cvMemories, cvGallery, cvBudget, cvDatabase, cvTesScore;
 
-    // SharedPreferences for user data
-    private SharedPreferences userPrefs;
-    private static final String PREF_USER_NAME = "user_name";
-    private static final String PREF_TES_SCORE = "tes_score";
-
-    // TES Score multipliers (as defined in requirements)
-    private static final int TES_NEW_TRIP = 5;
-    private static final int TES_MEMORY_ENTRY = 3;
-    private static final int TES_GALLERY_INTERACTION = 1;
-    private static final int TES_LOYALTY_FEATURE = 4;
+    // Database and Session Management
+    private DatabaseHelper dbHelper;
+    private SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        // Initialize SharedPreferences
-        userPrefs = getSharedPreferences("TripBuddyPrefs", MODE_PRIVATE);
+        // Handle window insets for edge-to-edge display
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.home_coordinator), (view, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            view.setPaddingRelative(
+                systemBars.left,
+                systemBars.top,
+                systemBars.right,
+                systemBars.bottom
+            );
+            return insets;
+        });
 
-        // Initialize views
+        initializeDependencies();
+
+        if (invalidateUserSession()) {
+            return;
+        }
+
         initializeViews();
-
-        // Load user data
         loadUserData();
-
-        // Set up click listeners
         setupClickListeners();
+    }
+
+    private void initializeDependencies() {
+        dbHelper = DatabaseHelper.getInstance(this);
+        sessionManager = new SessionManager(this);
+    }
+
+    private boolean invalidateUserSession() {
+        if (!sessionManager.isLoggedIn()) {
+            redirectToAuth();
+            return true;
+        }
+        return false;
     }
 
     private void initializeViews() {
@@ -56,53 +74,89 @@ public class HomeActivity extends AppCompatActivity {
         cvBudget = findViewById(R.id.cv_budget);
         cvDatabase = findViewById(R.id.cv_database);
         cvTesScore = findViewById(R.id.cv_tes_score);
-
-        // Quick action buttons
-        btnQuickMemory = findViewById(R.id.btn_quick_memory);
-        btnQuickTrip = findViewById(R.id.btn_quick_trip);
     }
 
     private void loadUserData() {
-        // Load user name
-        String userName = userPrefs.getString(PREF_USER_NAME, "Traveler");
-        tvUserName.setText(userName);
+        User currentUser = sessionManager.getLoggedInUser();
+        if (currentUser != null) {
+            tvUserName.setText(currentUser.getFullName());
+            HelperMethods.setUserName(this, currentUser.getFullName());
+        }
 
-        // Load and display TES score
-        int tesScore = userPrefs.getInt(PREF_TES_SCORE, 0);
+        int tesScore = HelperMethods.getCurrentTesScore(this);
         tvTesScore.setText(String.valueOf(tesScore));
     }
 
     private void setupClickListeners() {
-        tvProfile.setOnClickListener(v -> navigateToActivity(ProfileActivity.class));
 
-        cvMemories.setOnClickListener(v -> {
-            updateTesScore(TES_MEMORY_ENTRY);
-            navigateToActivity(MemoryActivity.class);
-        });
+        tvProfile.setOnClickListener(v -> showProfileMenu());
 
-        cvGallery.setOnClickListener(v -> {
-            updateTesScore(TES_GALLERY_INTERACTION);
-            navigateToActivity(GalleryActivity.class);
-        });
+        cvMemories.setOnClickListener(v -> handleFeatureClick(
+                MemoryActivity.class,
+                AppConstants.TesScore.MEMORY_ENTRY
+        ));
 
-        cvBudget.setOnClickListener(v -> {
-            updateTesScore(TES_NEW_TRIP);
-            navigateToActivity(BudgetActivity.class);
-        });
+        cvGallery.setOnClickListener(v -> handleFeatureClick(
+                GalleryActivity.class,
+                AppConstants.TesScore.GALLERY_INTERACTION
+        ));
+
+        cvBudget.setOnClickListener(v -> handleFeatureClick(
+                BudgetActivity.class,
+                AppConstants.TesScore.NEW_TRIP
+        ));
 
         cvDatabase.setOnClickListener(v -> navigateToActivity(DatabaseActivity.class));
-
         cvTesScore.setOnClickListener(v -> showTesScoreBreakdown());
+    }
 
-        btnQuickMemory.setOnClickListener(v -> {
-            updateTesScore(TES_MEMORY_ENTRY);
-            navigateToActivity(MemoryActivity.class);
-        });
+    private void handleFeatureClick(Class<?> activityClass, int tesPoints) {
+        HelperMethods.addTesPointsWithFeedback(this, tesPoints);
+        updateTesScoreDisplay();
+        navigateToActivity(activityClass);
+    }
 
-        btnQuickTrip.setOnClickListener(v -> {
-            updateTesScore(TES_NEW_TRIP);
-            navigateToActivity(BudgetActivity.class);
-        });
+    private void updateTesScoreDisplay() {
+        int currentScore = HelperMethods.getCurrentTesScore(this);
+        tvTesScore.setText(String.valueOf(currentScore));
+    }
+
+    private void showProfileMenu() {
+        User currentUser = sessionManager.getLoggedInUser();
+        String userName = currentUser != null ? currentUser.getFullName() : "User";
+
+        new AlertDialog.Builder(this)
+                .setTitle("Profile & Settings")
+                .setMessage("Logged in as: " + userName + "\n\nWhat would you like to do?")
+                .setPositiveButton("Logout", (dialog, which) -> showLogoutConfirmation())
+                .setNeutralButton("Profile Settings", (dialog, which) -> navigateToActivity(ProfileActivity.class))
+                .setNegativeButton("Cancel", null)
+                .show();
+    }
+
+    private void showLogoutConfirmation() {
+        HelperMethods.showConfirmationDialog(
+                this,
+                "Logout",
+                "Are you sure you want to logout?",
+                "Yes, Logout",
+                "Cancel",
+                this::performLogout,
+                null
+        );
+    }
+
+    private void performLogout() {
+        sessionManager.logoutUser();
+        HelperMethods.showToast(this, getString(R.string.logout_success));
+        redirectToAuth();
+    }
+
+    private void redirectToAuth() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
     }
 
     private void navigateToActivity(Class<?> activityClass) {
@@ -110,93 +164,34 @@ public class HomeActivity extends AppCompatActivity {
             Intent intent = new Intent(this, activityClass);
             startActivity(intent);
         } catch (Exception e) {
-            // Activity not implemented yet
             String activityName = activityClass.getSimpleName();
-            showToast(activityName + " coming soon!");
+            HelperMethods.showToast(this, activityName + " coming soon!");
         }
     }
 
     /**
-     * Update TES score and refresh display
-     */
-    private void updateTesScore(int points) {
-        int currentScore = userPrefs.getInt(PREF_TES_SCORE, 0);
-        int newScore = currentScore + points;
-
-        // Save updated score
-        userPrefs.edit()
-                .putInt(PREF_TES_SCORE, newScore)
-                .apply();
-
-        // Update display
-        tvTesScore.setText(String.valueOf(newScore));
-
-        // Show feedback to user
-        showToast("+" + points + " TES points earned! Total: " + newScore);
-    }
-
-    /**
-     * Show TES score breakdown dialog
+     * Show TES score breakdown dialog using helper methods
      */
     private void showTesScoreBreakdown() {
-        // TODO: Implement detailed TES score breakdown dialog
-        int currentScore = userPrefs.getInt(PREF_TES_SCORE, 0);
-        String message = "Current TES Score: " + currentScore + "\n\n" +
-                "Earning TES Points:\n" +
-                "• New trip planned: +" + TES_NEW_TRIP + " points\n" +
-                "• Memory entry: +" + TES_MEMORY_ENTRY + " points\n" +
-                "• Gallery interaction: +" + TES_GALLERY_INTERACTION + " point\n" +
-                "• Loyalty feature use: +" + TES_LOYALTY_FEATURE + " points";
+        User currentUser = sessionManager.getLoggedInUser();
+        int memoryCount = 0;
 
-        showAlert("TripBuddy Engagement Score", message);
-    }
+        if (currentUser != null) {
+            memoryCount = dbHelper.getUserMemoryCount(currentUser.getUserId());
+        }
 
-    /**
-     * Utility method to show toast messages
-     */
-    private void showToast(String message) {
-        android.widget.Toast.makeText(this, message, android.widget.Toast.LENGTH_SHORT).show();
-    }
-
-    /**
-     * Utility method to show alert dialogs
-     */
-    private void showAlert(String title, String message) {
-        new androidx.appcompat.app.AlertDialog.Builder(this)
-                .setTitle(title)
-                .setMessage(message)
-                .setPositiveButton("OK", null)
-                .show();
+        String breakdownMessage = HelperMethods.getTesScoreBreakdown(this, memoryCount);
+        HelperMethods.showAlert(this, "TripBuddy Engagement Score", breakdownMessage);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+
+        if (invalidateUserSession()) {
+            return;
+        }
+
         loadUserData();
-    }
-
-    /**
-     * Public method to set user name (called from AuthActivity)
-     */
-    public static void setUserName(android.content.Context context, String userName) {
-        android.content.SharedPreferences prefs = context.getSharedPreferences("TripBuddyPrefs", MODE_PRIVATE);
-        prefs.edit().putString(PREF_USER_NAME, userName).apply();
-    }
-
-    /**
-     * Public method to get current TES score
-     */
-    public static int getCurrentTesScore(android.content.Context context) {
-        android.content.SharedPreferences prefs = context.getSharedPreferences("TripBuddyPrefs", MODE_PRIVATE);
-        return prefs.getInt(PREF_TES_SCORE, 0);
-    }
-
-    /**
-     * Public method to add TES points from other activities
-     */
-    public static void addTesPoints(android.content.Context context, int points) {
-        android.content.SharedPreferences prefs = context.getSharedPreferences("TripBuddyPrefs", MODE_PRIVATE);
-        int currentScore = prefs.getInt(PREF_TES_SCORE, 0);
-        prefs.edit().putInt(PREF_TES_SCORE, currentScore + points).apply();
     }
 }

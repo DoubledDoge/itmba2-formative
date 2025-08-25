@@ -27,8 +27,8 @@
         android:layout_marginTop="120dp"
         app:cardCornerRadius="60dp"
         app:cardElevation="0dp"
-        app:strokeWidth="3dp"
-        app:strokeColor="@color/primary_color"
+        android:alpha="0.9"
+        app:cardBackgroundColor="#40FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -37,7 +37,7 @@
             android:id="@+id/iv_logo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:contentDescription="@string/tripbuddy_logo"
+            android:contentDescription="@string/app_name"
             android:src="@drawable/ic_tripbuddy_logo"
             android:scaleType="centerCrop" />
 
@@ -50,7 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:fontFamily="sans-serif-medium"
-        android:text="@string/app_name_display"
+        android:text="@string/app_name"
         android:textColor="@color/white"
         android:textSize="36sp"
         android:textStyle="bold"
@@ -131,7 +131,7 @@
             android:text="@string/icon_money"
             android:textSize="24sp"
             android:gravity="center"
-            android:contentDescription="@string/budget_feature" />
+            android:contentDescription="@string/planning_feature" />
 
         <TextView
             android:layout_width="32dp"
@@ -143,26 +143,22 @@
 
     </LinearLayout>
 
-    <!-- Get Started Button with width constraint -->
-    <com.google.android.material.button.MaterialButton
+    <!-- Get Started Button -->
+    <Button
         android:id="@+id/btn_get_started"
         android:layout_width="0dp"
         android:layout_height="56dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginEnd="48dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/rounded_button"
         android:maxWidth="320dp"
-        android:backgroundTint="@color/primary_color"
-        android:fontFamily="sans-serif-medium"
         android:text="@string/get_started"
         android:textAllCaps="false"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="18sp"
-        app:cornerRadius="28dp"
-        app:elevation="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:rippleColor="@color/white_20" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
