@@ -165,7 +165,6 @@
     <string name="error_user_not_found">Error: User not found. Please log in again.</string>
     <string name="loading_music_error">Error loading music.</string>
 
-
     <!-- Settings -->
     <string name="sound">Sound</string>
     <string name="background_music">Background Music</string>

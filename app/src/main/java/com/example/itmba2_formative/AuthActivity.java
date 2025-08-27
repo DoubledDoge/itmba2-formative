@@ -10,17 +10,16 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.itmba2_formative.models.User;
+import com.example.itmba2_formative.objects.User;
 
 public class AuthActivity extends BaseActivity {
 
     private boolean isLoginMode = true;
 
     // UI Components
-    private TextView tvWelcomeBack;
+    private TextView tvWelcomeBack, tvBackToWelcome;
     private EditText etEmail, etPassword, etConfirmPassword, etFullName;
     private Button btnPrimaryAction, btnSecondaryAction;
-    private TextView tvBackToWelcome;
 
     // Database and Session
     private DatabaseHelper dbHelper;
@@ -45,7 +44,6 @@ public class AuthActivity extends BaseActivity {
 
         initViews();
 
-        // Explicitly initialize login mode
         isLoginMode = true;
         switchToLoginMode();
 
@@ -68,13 +66,11 @@ public class AuthActivity extends BaseActivity {
     private void initViews() {
         tvWelcomeBack = findViewById(R.id.tv_welcome_back);
 
-        // Edit Texts
         etEmail = findViewById(R.id.et_email);
         etPassword = findViewById(R.id.et_password);
         etConfirmPassword = findViewById(R.id.et_confirm_password);
         etFullName = findViewById(R.id.et_full_name);
 
-        // Buttons
         btnPrimaryAction = findViewById(R.id.btn_primary_action);
         btnSecondaryAction = findViewById(R.id.btn_secondary_action);
         tvBackToWelcome = findViewById(R.id.tv_back_to_welcome);
@@ -96,15 +92,12 @@ public class AuthActivity extends BaseActivity {
                 performRegistration();
             }
         });
-
-        // Add double-tap to toggle system UI for testing
-        findViewById(R.id.iv_auth_logo).setOnClickListener(v -> toggleSystemUI());
     }
 
     private void toggleAuthMode() {
         isLoginMode = !isLoginMode;
 
-        // Clear errors from all EditText fields
+        // Clear errors
         etEmail.setError(null);
         etPassword.setError(null);
         etConfirmPassword.setError(null);
@@ -159,7 +152,6 @@ public class AuthActivity extends BaseActivity {
 
         setLoadingState(true, getString(R.string.loading_login));
 
-        // Perform authentication in background thread
         new Thread(() -> authenticateUser(email, password)).start();
     }
 
@@ -243,12 +235,10 @@ public class AuthActivity extends BaseActivity {
 
         setLoadingState(true, getString(R.string.loading_register));
 
-        // Perform registration in background thread
         new Thread(() -> registerUser(email, password, fullName)).start();
     }
 
     private void registerUser(String email, String password, String fullName) {
-        // Check if email already exists
         boolean emailExists = dbHelper.isEmailExists(email);
 
         if (emailExists) {
@@ -268,7 +258,7 @@ public class AuthActivity extends BaseActivity {
             if (userId > 0) {
                 handleSuccessfulRegistration(userId, email, fullName);
             } else {
-                handleFailedRegistration();
+                HelperMethods.showToast(this, "Failed to create account. Please try again.");
             }
         });
     }
@@ -280,10 +270,6 @@ public class AuthActivity extends BaseActivity {
         HelperMethods.showToast(this,
                 getString(R.string.account_created) + " Welcome, " + newUser.getFullName() + "!");
         navigateToHome();
-    }
-
-    private void handleFailedRegistration() {
-        HelperMethods.showToast(this, "Failed to create account. Please try again.");
     }
 
     private void setLoadingState(boolean isLoading, String buttonText) {

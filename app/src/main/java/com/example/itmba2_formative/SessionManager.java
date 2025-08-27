@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
-import com.example.itmba2_formative.models.User;
+import com.example.itmba2_formative.objects.User;
 
 public class SessionManager {
     private final SharedPreferences pref;

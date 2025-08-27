@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.itmba2_formative.models.Memory;
+import com.example.itmba2_formative.objects.Memory;
 import java.util.List;
 import java.util.Objects;
 
@@ -37,19 +37,19 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryV
     public void onBindViewHolder(@NonNull GalleryViewHolder holder, int position) {
         Memory memory = memories.get(position);
 
-        // Load image from memory's photo URI
+        // Load image from memory's photo
         if (memory.getPhotoUri() != null) {
             try {
                 holder.imageView.setImageURI(memory.getPhotoUri());
-                // Set scale type for consistent appearance
+                // Set scale type
                 holder.imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             } catch (SecurityException e) {
-                // Handle permission issues - show placeholder
+                // Placeholder
                 holder.imageView.setImageResource(R.color.medium_text);
                 holder.imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
             }
         } else {
-            // No photo - show placeholder
+            // Placeholder
             holder.imageView.setImageResource(R.color.medium_text);
             holder.imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
         }

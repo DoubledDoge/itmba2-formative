@@ -16,7 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import android.content.SharedPreferences;
 import androidx.activity.OnBackPressedCallback;
-import com.example.itmba2_formative.models.Memory;
+import com.example.itmba2_formative.objects.Memory;
 import android.media.MediaMetadataRetriever;
 import android.graphics.BitmapFactory;
 import android.graphics.Bitmap;
@@ -28,32 +28,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MemoryActivity extends BaseActivity {
-    private LinearLayout llMusicPlaceholder;
-    private LinearLayout llSelectedMusic;
-    private LinearLayout llMusicControls;
-    private TextView btnPlayMusic;
-    private TextView btnPauseMusic;
-    private TextView btnStopMusic;
-    private TextView tvTrackTitle;
-    private TextView tvTrackArtist;
-    private TextView btnRemoveTrack;
-    private TextView btnBackHome;
+    private LinearLayout llMusicPlaceholder, llSelectedMusic, llMusicControls, llPhotoPlaceholder, llSelectedPhoto;
+    private TextView tvPlayMusic, tvPauseMusic, tvStopMusic, tvTrackTitle, tvTrackArtist, tvRemoveTrack, tvBackHome, tvRemovePhoto;
     private MusicManager musicManager;
     private DatabaseHelper dbHelper;
-
-    private LinearLayout llPhotoPlaceholder;
-    private LinearLayout llSelectedPhoto;
-    private ImageView ivMemoryPhoto;
-    private TextView btnRemovePhoto;
+    private ImageView ivMemoryPhoto, ivAlbumArt;
     private Uri selectedPhotoUri;
-
     private EditText etMemoryTitle, etMemoryDescription, etMemoryLocation;
     private Button btnSaveDraft, btnCreateMemory;
-
-    private ImageView ivAlbumArt;
-
-    private boolean isPickingPhoto = false;
-    private boolean isPickingMusic = false;
+    private boolean isPickingPhoto = false, isPickingMusic = false;
 
     private final ActivityResultLauncher<Intent> pickMusicLauncher = registerForActivityResult(
         new ActivityResultContracts.StartActivityForResult(),
@@ -135,18 +118,18 @@ public class MemoryActivity extends BaseActivity {
         llMusicPlaceholder = findViewById(R.id.ll_music_placeholder);
         llSelectedMusic = findViewById(R.id.ll_selected_music);
         llMusicControls = findViewById(R.id.ll_music_controls);
-        btnPlayMusic = findViewById(R.id.btn_music_play);
-        btnPauseMusic = findViewById(R.id.btn_music_pause);
-        btnStopMusic = findViewById(R.id.btn_music_stop);
+        tvPlayMusic = findViewById(R.id.tv_music_play);
+        tvPauseMusic = findViewById(R.id.tv_music_pause);
+        tvStopMusic = findViewById(R.id.btn_music_stop);
         tvTrackTitle = findViewById(R.id.tv_track_title);
         tvTrackArtist = findViewById(R.id.tv_track_artist);
-        btnRemoveTrack = findViewById(R.id.btn_remove_track);
-        btnBackHome = findViewById(R.id.btn_back_home);
+        tvRemoveTrack = findViewById(R.id.btn_remove_track);
+        tvBackHome = findViewById(R.id.tv_back_home);
 
         llPhotoPlaceholder = findViewById(R.id.ll_photo_placeholder);
         llSelectedPhoto = findViewById(R.id.ll_selected_photo);
         ivMemoryPhoto = findViewById(R.id.iv_memory_photo);
-        btnRemovePhoto = findViewById(R.id.btn_remove_photo);
+        tvRemovePhoto = findViewById(R.id.btn_remove_photo);
 
         etMemoryTitle = findViewById(R.id.et_memory_title);
         etMemoryDescription = findViewById(R.id.et_memory_description);
@@ -160,31 +143,31 @@ public class MemoryActivity extends BaseActivity {
     private void setupClickListeners() {
         llMusicPlaceholder.setOnClickListener(v -> openMusicPicker());
 
-        btnPlayMusic.setOnClickListener(v -> {
+        tvPlayMusic.setOnClickListener(v -> {
             musicManager.playMusic();
             updatePlaybackControls(true);
         });
 
-        btnPauseMusic.setOnClickListener(v -> {
+        tvPauseMusic.setOnClickListener(v -> {
             musicManager.pauseMusic();
             updatePlaybackControls(false);
         });
 
-        btnStopMusic.setOnClickListener(v -> {
+        tvStopMusic.setOnClickListener(v -> {
             musicManager.stopMusic();
             updatePlaybackControls(false);
         });
 
-        btnRemoveTrack.setOnClickListener(v -> removeSelectedMusic());
+        tvRemoveTrack.setOnClickListener(v -> removeSelectedMusic());
 
-        btnBackHome.setOnClickListener(v -> {
-            // Make sure to cleanup music before finishing
+        tvBackHome.setOnClickListener(v -> {
+            // Cleanup music
             musicManager.releasePlayer();
             finish();
         });
 
         llPhotoPlaceholder.setOnClickListener(v -> openPhotoPicker());
-        btnRemovePhoto.setOnClickListener(v -> removeSelectedPhoto());
+        tvRemovePhoto.setOnClickListener(v -> removeSelectedPhoto());
 
         btnSaveDraft.setOnClickListener(v -> saveMemory(true));
         btnCreateMemory.setOnClickListener(v -> saveMemory(false));
@@ -227,14 +210,13 @@ public class MemoryActivity extends BaseActivity {
         List<String> permissions = new ArrayList<>();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            // Android 13+ uses more granular permissions
             permissions.add(Manifest.permission.READ_MEDIA_IMAGES);
-            permissions.add(Manifest.permission.READ_MEDIA_AUDIO); // Added for music
+            permissions.add(Manifest.permission.READ_MEDIA_AUDIO);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) { // Android 14+
                 permissions.add(Manifest.permission.READ_MEDIA_VISUAL_USER_SELECTED);
             }
         } else {
-            // For Android 12 and below
+            // For Android versions below 13
             permissions.add(Manifest.permission.READ_EXTERNAL_STORAGE);
         }
         return permissions;
@@ -267,7 +249,7 @@ public class MemoryActivity extends BaseActivity {
         // Initialize music player
         musicManager.initializePlayer(this, musicUri);
         musicManager.setOnPreparedCallback(() -> {
-            btnPlayMusic.setEnabled(true);
+            tvPlayMusic.setEnabled(true);
             // Auto-play when track is ready
             musicManager.playMusic();
             updatePlaybackControls(true);
@@ -291,11 +273,10 @@ public class MemoryActivity extends BaseActivity {
                 Bitmap bitmap = BitmapFactory.decodeByteArray(albumArtData, 0, albumArtData.length);
                 ivAlbumArt.setImageBitmap(bitmap);
             } else {
-                // Set default album art background if no embedded art is found
+                // Set default album art background
                 ivAlbumArt.setImageResource(R.color.primary_color);
             }
         } catch (Exception e) {
-            // Handle any errors and set default values
             tvTrackTitle.setText(musicUri.getLastPathSegment());
             tvTrackArtist.setText(R.string.unknown_artist);
             ivAlbumArt.setImageResource(R.color.primary_color);
@@ -305,7 +286,7 @@ public class MemoryActivity extends BaseActivity {
     private void handlePhotoSelection(Uri photoUri) {
         selectedPhotoUri = photoUri;
 
-        // Update UI to show selected photo
+        // Update UI
         llPhotoPlaceholder.setVisibility(View.GONE);
         llSelectedPhoto.setVisibility(View.VISIBLE);
 
@@ -333,8 +314,8 @@ public class MemoryActivity extends BaseActivity {
     }
 
     private void updatePlaybackControls(boolean isPlaying) {
-        btnPlayMusic.setVisibility(isPlaying ? View.GONE : View.VISIBLE);
-        btnPauseMusic.setVisibility(isPlaying ? View.VISIBLE : View.GONE);
+        tvPlayMusic.setVisibility(isPlaying ? View.GONE : View.VISIBLE);
+        tvPauseMusic.setVisibility(isPlaying ? View.VISIBLE : View.GONE);
     }
 
     private void saveMemory(boolean asDraft) {
@@ -351,9 +332,9 @@ public class MemoryActivity extends BaseActivity {
             }
         }
 
-        // Create memory object
+        // Memory object
         Memory memory = new Memory(
-            0, // ID will be set by the database
+            0,
             etMemoryTitle.getText().toString().trim(),
             etMemoryDescription.getText().toString().trim(),
             selectedPhotoUri,
@@ -375,11 +356,9 @@ public class MemoryActivity extends BaseActivity {
         SharedPreferences prefs = getSharedPreferences("user_prefs", MODE_PRIVATE);
         int userId = prefs.getInt("user_id", 1);
 
-        // Take persistent permissions for photo URI
+        // Take persistent permissions for photo
         if (memory.getPhotoUri() != null) {
             try {
-                // Ensure the correct flags are used, primarily FLAG_GRANT_READ_URI_PERMISSION
-                // as persistable permission should have been granted by ACTION_OPEN_DOCUMENT.
                 final int takeFlags = Intent.FLAG_GRANT_READ_URI_PERMISSION;
                 getContentResolver().takePersistableUriPermission(memory.getPhotoUri(), takeFlags);
             } catch (SecurityException e) {
@@ -388,10 +367,9 @@ public class MemoryActivity extends BaseActivity {
             }
         }
 
-        // Take persistent permissions for music URI
+        // Take persistent permissions for music
         if (memory.getMusicUri() != null) {
             try {
-                 // Ensure the correct flags are used, primarily FLAG_GRANT_READ_URI_PERMISSION
                 final int takeFlags = Intent.FLAG_GRANT_READ_URI_PERMISSION;
                 getContentResolver().takePersistableUriPermission(memory.getMusicUri(), takeFlags);
             } catch (SecurityException e) {
@@ -405,8 +383,8 @@ public class MemoryActivity extends BaseActivity {
             memory.getDescription(),
             memory.getPhotoUri() != null ? memory.getPhotoUri().toString() : null,
             memory.getLocation(),
-            null, // unused
-            null, // unused
+                // unused
+                // unused
             memory.getMusicUri() != null ? memory.getMusicUri().toString() : null);
         return result > 0;
     }

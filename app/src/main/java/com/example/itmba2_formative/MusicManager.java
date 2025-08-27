@@ -17,7 +17,7 @@ public class MusicManager {
     private boolean isPrepared = false;
 
     private MusicManager() {
-        // Private constructor to enforce singleton pattern
+        // Constructor
     }
 
     public static synchronized MusicManager getInstance() {
@@ -49,7 +49,7 @@ public class MusicManager {
             mediaPlayer.setOnErrorListener((mp, what, extra) -> {
                 Log.e(TAG, "MediaPlayer error: " + what + ", " + extra);
                 isPrepared = false; // Reset prepared state on error
-                return false; // True if the method handled the error, false if it didn't.
+                return false;
             });
             mediaPlayer.prepareAsync();
             currentTrackUri = trackUri;
@@ -57,7 +57,7 @@ public class MusicManager {
             Log.e(TAG, "Error initializing MediaPlayer", e);
             isPrepared = false;
         } catch (IllegalStateException e) {
-            Log.e(TAG, "Error initializing MediaPlayer - Illegal State", e);
+            Log.e(TAG, "What went wrong here?", e);
             isPrepared = false;
         }
     }
@@ -130,7 +130,7 @@ public class MusicManager {
         return false;
     }
 
-    // Callback interfaces
+    // Allow other activities to know whats going on
     private OnPreparedCallback onPreparedCallback;
     private OnCompletionCallback onCompletionCallback;
 
@@ -146,7 +146,4 @@ public class MusicManager {
         this.onPreparedCallback = callback;
     }
 
-    public void setOnCompletionCallback(OnCompletionCallback callback) {
-        this.onCompletionCallback = callback;
-    }
 }

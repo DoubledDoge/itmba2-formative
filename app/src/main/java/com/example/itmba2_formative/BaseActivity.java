@@ -16,7 +16,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        applyAppTheme(); // Apply theme before super.onCreate()
+        applyAppTheme();
         super.onCreate(savedInstanceState);
 
         WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
@@ -72,24 +72,6 @@ public abstract class BaseActivity extends AppCompatActivity {
                         View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
                         View.SYSTEM_UI_FLAG_FULLSCREEN
         );
-    }
-
-    protected void showSystemUI() {
-        if (windowInsetsController != null) {
-            windowInsetsController.show(WindowInsetsCompat.Type.systemBars());
-        }
-        View decorView = getWindow().getDecorView();
-        decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
-    }
-
-    protected void toggleSystemUI() {
-        View decorView = getWindow().getDecorView();
-        int uiOptions = decorView.getSystemUiVisibility();
-        if ((uiOptions & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
-            hideSystemUI();
-        } else {
-            showSystemUI();
-        }
     }
 
     @Override

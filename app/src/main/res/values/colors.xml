@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Primary Brand Colors -->
-    <color name="primary_color">#2196F3</color>        <!-- TripBuddy Blue -->
-    <color name="accent_color">#FFC107</color>          <!-- TripBuddy Gold/Yellow -->
+    <color name="primary_color">#2196F3</color>
+    <color name="accent_color">#FFC107</color>
 
     <!-- Background Colors -->
-    <color name="overlay_color">#80000000</color>       <!-- Semi-transparent black overlay -->
-    <color name="card_background">#33FFFFFF</color>     <!-- Semi-transparent white for cards -->
-    <color name="debug_color">#FF5722</color>           <!-- Debug/Development orange-red -->
+    <color name="overlay_color">#80000000</color>
+    <color name="card_background">#33FFFFFF</color>
+    <color name="debug_color">#FF5722</color>
     <color name="app_bar_color">#B0681C</color>
 
     <!-- Text Colors -->
     <color name="white">#FFFFFF</color>
-    <color name="white_90">#E6FFFFFF</color>            <!-- 90% white -->
-    <color name="white_80">#CCFFFFFF</color>            <!-- 80% white -->
-    <color name="white_20">#33FFFFFF</color>            <!-- 20% white for ripples -->
+    <color name="white_90">#E6FFFFFF</color>
+    <color name="white_80">#CCFFFFFF</color>
+    <color name="white_20">#33FFFFFF</color>
     <color name="black">#000000</color>
-    <color name="dark_text">#212121</color>             <!-- High contrast dark text -->
-    <color name="medium_text">#757575</color>           <!-- Medium contrast text -->
+    <color name="dark_text">#212121</color>
+    <color name="medium_text">#757575</color>
 
     <!-- Status Colors -->
     <color name="error_color">#F44336</color>
@@ -25,16 +25,17 @@
     <color name="info_color">#2196F3</color>
     <color name="success_color">#4CAF50</color>
 
-    <!-- Gradient Colors (for drawable backgrounds) -->
-    <color name="gradient_start">#1976D2</color>        <!-- Deep blue -->
-    <color name="gradient_middle">#2196F3</color>       <!-- Primary blue -->
+    <!-- Gradient Colors  -->
+    <color name="gradient_start">#1976D2</color>
+    <color name="gradient_middle">#2196F3</color>
     <color name="gradient_end">#42A5F5</color>
+
     <!-- Dark Mode Specific Colors -->
-    <color name="dark_mode_primary">#FF6B35</color> <!-- Example: Your primary orange -->
+    <color name="dark_mode_primary">#FF6B35</color>
     <color name="dark_mode_onPrimary">#FFFFFF</color>
-    <color name="dark_mode_secondary">#FF8A50</color> <!-- Example: A lighter orange -->
+    <color name="dark_mode_secondary">#FF8A50</color>
     <color name="dark_mode_onSecondary">#000000</color>
-    <color name="dark_mode_background">#121212</color> <!-- Common dark background -->
-    <color name="dark_mode_surface">#1E1E1E</color>   <!-- Slightly lighter than background for cards -->
-    <color name="dark_mode_onSurface">#FFFFFF</color>          <!-- Light blue -->
+    <color name="dark_mode_background">#121212</color>
+    <color name="dark_mode_surface">#1E1E1E</color>
+    <color name="dark_mode_onSurface">#FFFFFF</color>
 </resources>

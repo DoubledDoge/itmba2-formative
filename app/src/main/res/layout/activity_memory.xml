@@ -39,7 +39,7 @@
 
                 <!-- Back Button -->
                 <TextView
-                    android:id="@+id/btn_back_home"
+                    android:id="@+id/tv_back_home"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
@@ -437,7 +437,7 @@
                         android:visibility="gone">
 
                         <TextView
-                            android:id="@+id/btn_music_play"
+                            android:id="@+id/tv_music_play"
                             android:layout_width="48dp"
                             android:layout_height="48dp"
                             android:layout_marginEnd="16dp"
@@ -449,7 +449,7 @@
                             android:contentDescription="@string/play_music" />
 
                         <TextView
-                            android:id="@+id/btn_music_pause"
+                            android:id="@+id/tv_music_pause"
                             android:layout_width="48dp"
                             android:layout_height="48dp"
                             android:layout_marginEnd="16dp"

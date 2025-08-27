@@ -1,4 +1,4 @@
-package com.example.itmba2_formative.models;
+package com.example.itmba2_formative.objects;
 
 public class User {
     private final int userId;

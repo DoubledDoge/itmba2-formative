@@ -139,7 +139,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <!-- First Row - Memories & Gallery -->
+            <!-- First Row -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -256,7 +256,7 @@
 
             </LinearLayout>
 
-            <!-- Second Row - Budget & Database -->
+            <!-- Second Row -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

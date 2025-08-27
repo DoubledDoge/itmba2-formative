@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.example.itmba2_formative.models.User;
+import com.example.itmba2_formative.objects.User;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TAG = "DatabaseHelper";
@@ -54,7 +54,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // Create Users table
         String CREATE_USERS_TABLE = "CREATE TABLE " + TABLE_USERS + "("
                 + KEY_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + KEY_USER_EMAIL + " TEXT UNIQUE NOT NULL,"
@@ -64,7 +63,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + KEY_USER_LAST_LOGIN + " DATETIME"
                 + ")";
 
-        // Create memories table with foreign key
         String CREATE_MEMORIES_TABLE = "CREATE TABLE " + TABLE_MEMORIES + "("
                 + KEY_MEMORY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + KEY_USER_ID_FK + " INTEGER NOT NULL,"
@@ -90,11 +88,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    // User Authentication Methods
-
-    /**
-     * Create a new user account
-     */
     public long createUser(String email, String password, String fullName) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -106,13 +99,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         long userId = db.insert(TABLE_USERS, null, values);
         db.close();
 
-        Log.d(TAG, "User created with ID: " + userId);
         return userId;
     }
 
-    /**
-     * Authenticate user login
-     */
     public User authenticateUser(String email, String password) {
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -133,7 +122,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             // Update last login timestamp
             updateLastLogin(user.getUserId());
 
-            Log.d(TAG, "User authenticated successfully: " + user.getEmail());
         }
 
         cursor.close();
@@ -142,9 +130,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return user;
     }
 
-    /**
-     * Check if email already exists
-     */
     public boolean isEmailExists(String email) {
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -162,9 +147,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return exists;
     }
 
-    /**
-     * Update user's last login timestamp
-     */
     private void updateLastLogin(int userId) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -174,11 +156,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    /**
-     * Add a new memory entry
-     */
     public long addMemory(int userId, String title, String textContent, String imagePath,
-                          String location, String date, String mood, String backgroundMusic) {
+                          String location, String backgroundMusic) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
@@ -193,13 +172,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         long memoryId = db.insert(TABLE_MEMORIES, null, values);
         db.close();
 
-        Log.d(TAG, "Memory added with ID: " + memoryId);
         return memoryId;
     }
 
-    /**
-     * Get all memories for a user
-     */
     public Cursor getUserMemories(int userId) {
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -215,29 +190,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return db.query(TABLE_MEMORIES, columns, selection, selectionArgs, null, null, orderBy);
     }
 
-    /**
-     * Get memory count for a user
-     */
-    public int getUserMemoryCount(int userId) {
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        String[] columns = {KEY_MEMORY_ID};
-        String selection = KEY_USER_ID_FK + "=?";
-        String[] selectionArgs = {String.valueOf(userId)};
-
-        Cursor cursor = db.query(TABLE_MEMORIES, columns, selection, selectionArgs, null, null, null);
-
-        int count;
-        count = cursor.getCount();
-        cursor.close();
-
-        db.close();
-        return count;
-    }
-
-    /**
-     * Delete a memory
-     */
     public boolean deleteMemory(int memoryId, int userId) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -250,39 +202,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return rowsAffected > 0;
     }
 
-    // Utility Methods
-
-    /**
-     * Get database statistics for debugging
-     */
-    public String getDatabaseStats() {
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        // Count users
-        Cursor userCursor = db.rawQuery("SELECT COUNT(*) FROM " + TABLE_USERS, null);
-        int userCount = 0;
-        if (userCursor.moveToFirst()) {
-            userCount = userCursor.getInt(0);
-            userCursor.close();
-        }
-
-        // Count memories
-        Cursor memoryCursor = db.rawQuery("SELECT COUNT(*) FROM " + TABLE_MEMORIES, null);
-        int memoryCount = 0;
-        if (memoryCursor.moveToFirst()) {
-            memoryCount = memoryCursor.getInt(0);
-            memoryCursor.close();
-        }
-
-        db.close();
-
-        return "Users: " + userCount + ", Memories: " + memoryCount;
-    }
-
-    /**
-     * Retrieves all data from specified tables and formats it as a string for debugging.
-     * @return A string containing all data from the users and memories tables.
-     */
     public String getDebugDatabaseDump() {
         SQLiteDatabase db = this.getReadableDatabase();
         StringBuilder dump = new StringBuilder();

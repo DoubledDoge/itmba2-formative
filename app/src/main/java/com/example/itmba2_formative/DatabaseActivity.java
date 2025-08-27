@@ -21,15 +21,12 @@ public class DatabaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_database);
 
-        // Initialize executor for background tasks
         executor = Executors.newSingleThreadExecutor();
         mainHandler = new Handler(Looper.getMainLooper());
 
-        // Fixed toolbar reference to match XML
         Toolbar toolbar = findViewById(R.id.toolbar_database);
         setSupportActionBar(toolbar);
 
-        // Fixed back button reference to match XML
         TextView btnBack = findViewById(R.id.btn_back_database);
         btnBack.setOnClickListener(v -> finish());
 
@@ -42,7 +39,7 @@ public class DatabaseActivity extends AppCompatActivity {
     private void loadDatabaseContent() {
         tvDatabaseContent.setText(getString(R.string.loading_database));
 
-        // Run database operations on background thread to prevent ANR
+        // Run database operations on background thread
         executor.execute(() -> {
             String dbDump = dbHelper.getDebugDatabaseDump();
 

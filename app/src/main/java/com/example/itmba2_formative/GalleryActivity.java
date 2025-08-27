@@ -13,14 +13,14 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.itmba2_formative.models.Memory;
+import com.example.itmba2_formative.objects.Memory;
 import java.util.ArrayList;
 import java.util.List;
 
 public class GalleryActivity extends BaseActivity {
 
     private RecyclerView rvGallery;
-    private TextView btnBackHome;
+    private TextView tvBackHome;
     private GalleryAdapter adapter;
     private DatabaseHelper dbHelper;
     private SessionManager sessionManager;
@@ -30,7 +30,6 @@ public class GalleryActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallery);
 
-        // Initialize database helper and session manager
         dbHelper = DatabaseHelper.getInstance(this);
         sessionManager = new SessionManager(this);
 
@@ -55,13 +54,12 @@ public class GalleryActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        // Refresh memories when returning to gallery
         loadUserMemories();
     }
 
     private void initializeViews() {
         rvGallery = findViewById(R.id.rv_gallery);
-        btnBackHome = findViewById(R.id.btn_back_home);
+        tvBackHome = findViewById(R.id.tv_back_home);
     }
 
     private void setupGalleryGrid() {
@@ -75,13 +73,7 @@ public class GalleryActivity extends BaseActivity {
     }
 
     private void loadUserMemories() {
-        // Get current user ID
         int userId = getCurrentUserId();
-        if (userId == -1) {
-            showToast(this, "Please log in to view your memories");
-            finish();
-            return;
-        }
 
         List<Memory> memories = new ArrayList<>();
 
@@ -97,7 +89,7 @@ public class GalleryActivity extends BaseActivity {
                     String musicUriString = cursor.getString(cursor.getColumnIndexOrThrow("music_uri"));
                     String location = cursor.getString(cursor.getColumnIndexOrThrow("location"));
 
-                    // Parse URIs
+                    // Initialize uris safely
                     Uri photoUri = null;
                     Uri musicUri = null;
 
@@ -130,17 +122,15 @@ public class GalleryActivity extends BaseActivity {
             showToast(this, "Error loading memories: " + e.getMessage());
         }
 
-        // Update adapter with loaded memories
         adapter.updateMemories(memories);
 
-        // Show message if no memories with photos exist
         if (memories.isEmpty()) {
             showToast(this, "No photo memories found. Create some memories first!");
         }
     }
 
     private int getCurrentUserId() {
-        // Try to get user ID from session manager first
+        // Try to get user ID from session manager
         if (sessionManager.isLoggedIn()) {
             return sessionManager.getLoggedInUser().getUserId();
         }
@@ -158,7 +148,7 @@ public class GalleryActivity extends BaseActivity {
     }
 
     private void setupClickListeners() {
-        btnBackHome.setOnClickListener(v -> finish());
+        tvBackHome.setOnClickListener(v -> finish());
     }
 
     private void onPhotoClick(Memory memory) {

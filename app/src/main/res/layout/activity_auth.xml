@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Logo with circular border -->
+    <!-- Logo -->
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_auth_logo"
         android:layout_width="80dp"
@@ -72,7 +72,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_auth_app_name" />
 
-    <!-- Login Form Container -->
+    <!-- Login Form -->
     <LinearLayout
         android:id="@+id/ll_auth_form"
         android:layout_width="0dp"
@@ -258,7 +258,7 @@
 
     </LinearLayout>
 
-    <!-- Back to Welcome with proper touch target -->
+    <!-- Back to Welcome  -->
     <TextView
         android:id="@+id/tv_back_to_welcome"
         android:layout_width="wrap_content"

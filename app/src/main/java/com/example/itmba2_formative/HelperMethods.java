@@ -15,16 +15,6 @@ public final class HelperMethods {
         }
     }
 
-    public static void showAlert(Context context, String title, String message) {
-        if (context == null) return;
-
-        new AlertDialog.Builder(context)
-                .setTitle(title)
-                .setMessage(message)
-                .setPositiveButton("OK", null)
-                .show();
-    }
-
     public static void showConfirmationDialog(Context context, String title, String message,
                                               String positiveText, String negativeText,
                                               Runnable onConfirm, Runnable onCancel) {
@@ -66,8 +56,6 @@ public final class HelperMethods {
                 fullName.trim().length() <= AppConstants.Validation.MAX_FULL_NAME_LENGTH;
     }
 
-    // getCurrentTesScore, updateTesScore, addTesPointsWithFeedback, and getTesScoreBreakdown removed
-
     public static String capitalizeWords(String str) {
         if (isEmpty(str)) return str;
 
@@ -83,25 +71,11 @@ public final class HelperMethods {
                 }
             }
         }
-        return capitalized.toString().trim(); // Ensure no trailing space if original didn't have one
+        return capitalized.toString().trim();
     }
 
     public static SharedPreferences getSharedPreferences(Context context) {
         return context.getSharedPreferences(AppConstants.PrefKeys.PREF_NAME, Context.MODE_PRIVATE);
-    }
-
-    public static void saveToPreferences(Context context, String key, String value) {
-        if (context == null || isEmpty(key)) return;
-        getSharedPreferences(context).edit().putString(key, value).apply();
-    }
-
-    public static void setUserName(Context context, String userName) {
-        saveToPreferences(context, AppConstants.PrefKeys.PREF_USER_NAME, userName);
-    }
-
-    public static void saveBooleanToPreferences(Context context, String key, boolean value) {
-        if (context == null || isEmpty(key)) return;
-        getSharedPreferences(context).edit().putBoolean(key, value).apply();
     }
 
     public static boolean getBooleanFromPreferences(Context context, String key, boolean defaultValue) {
@@ -109,8 +83,4 @@ public final class HelperMethods {
         return getSharedPreferences(context).getBoolean(key, defaultValue);
     }
 
-     public static String getStringFromPreferences(Context context, String key, String defaultValue) {
-        if (context == null || isEmpty(key)) return defaultValue;
-        return getSharedPreferences(context).getString(key, defaultValue);
-    }
 }

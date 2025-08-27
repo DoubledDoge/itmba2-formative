@@ -4,11 +4,5 @@
     <dimen name="gallery_card_width">150dp</dimen>
     <dimen name="gallery_card_height">150dp</dimen>
     <dimen name="gallery_spacing">4dp</dimen>
-
-    <!-- Other dimensions you might need -->
-    <dimen name="card_corner_radius">12dp</dimen>
-    <dimen name="card_elevation">4dp</dimen>
-    <dimen name="standard_margin">16dp</dimen>
-    <dimen name="small_margin">8dp</dimen>
 </resources>
 

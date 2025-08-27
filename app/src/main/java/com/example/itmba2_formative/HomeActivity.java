@@ -9,7 +9,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.itmba2_formative.models.User;
+import com.example.itmba2_formative.objects.User;
 
 public class HomeActivity extends BaseActivity {
 
@@ -17,8 +17,6 @@ public class HomeActivity extends BaseActivity {
     private TextView tvUserName, tvProfile;
     private CardView cvMemories, cvGallery, cvBudget, cvDatabase;
 
-    // Database and Session Management
-    private DatabaseHelper dbHelper;
     private SessionManager sessionManager;
 
     @Override
@@ -50,7 +48,7 @@ public class HomeActivity extends BaseActivity {
     }
 
     private void initializeDependencies() {
-        dbHelper = DatabaseHelper.getInstance(this);
+        DatabaseHelper.getInstance(this);
         sessionManager = new SessionManager(this);
     }
 
@@ -78,7 +76,6 @@ public class HomeActivity extends BaseActivity {
         User currentUser = sessionManager.getLoggedInUser();
         if (currentUser != null) {
             tvUserName.setText(currentUser.getFullName());
-            // HelperMethods.setUserName(this, currentUser.getFullName()); // This might be redundant if sessionManager handles it
         }
     }
 
@@ -92,12 +89,11 @@ public class HomeActivity extends BaseActivity {
     }
 
     private void showProfileMenu() {
-        User currentUser = sessionManager.getLoggedInUser();
-        String userName = currentUser != null ? currentUser.getFullName() : "User";
+        sessionManager.getLoggedInUser();
 
         new AlertDialog.Builder(this)
                 .setTitle("Profile & Settings")
-                .setMessage("Logged in as: " + userName + "\n\nWhat would you like to do?")
+                .setMessage("What would you like to do?")
                 .setPositiveButton("Logout", (dialog, which) -> showLogoutConfirmation())
                 .setNeutralButton("Profile Settings", (dialog, which) -> navigateToActivity(ProfileActivity.class))
                 .setNegativeButton("Cancel", null)
@@ -146,7 +142,6 @@ public class HomeActivity extends BaseActivity {
         if (invalidateUserSession()) {
             return;
         }
-        // Reload user data in case name changed or other relevant info
         loadUserData();
     }
 }

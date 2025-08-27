@@ -14,27 +14,18 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 // Import SessionManager and User
-import com.example.itmba2_formative.models.User;
+import com.example.itmba2_formative.objects.User;
 
 public class PhotoViewerActivity extends BaseActivity {
 
     private ImageView ivPhotoViewer;
-    private TextView btnCloseViewer;
-    private TextView tvPhotoTitle;
-    private TextView tvPhotoDescription;
-    private TextView tvPhotoLocation;
-    private TextView btnDeletePhoto;
-
+    private TextView btnCloseViewer, tvPhotoTitle, tvPhotoDescription, tvPhotoLocation, tvDeletePhoto, tvPlayMusicViewer, tvPauseMusicViewer;
     private LinearLayout llMusicPlaybackControlsViewer;
-    private TextView btnPlayMusicViewer;
-    private TextView btnPauseMusicViewer;
-
     private DatabaseHelper dbHelper;
-    private int memoryId = -1;
-    private int currentUserId = -1;
+    private int memoryId = -1, currentUserId = -1;
 
     private MusicManager musicManager;
-    private Uri musicUri; // Specific to the memory being viewed
+    private Uri musicUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,11 +66,11 @@ public class PhotoViewerActivity extends BaseActivity {
         tvPhotoTitle = findViewById(R.id.tv_photo_title);
         tvPhotoDescription = findViewById(R.id.tv_photo_description);
         tvPhotoLocation = findViewById(R.id.tv_photo_location);
-        btnDeletePhoto = findViewById(R.id.btn_delete_photo);
+        tvDeletePhoto = findViewById(R.id.tv_delete_photo);
 
         llMusicPlaybackControlsViewer = findViewById(R.id.ll_music_playback_controls_viewer);
-        btnPlayMusicViewer = findViewById(R.id.btn_play_music_viewer);
-        btnPauseMusicViewer = findViewById(R.id.btn_pause_music_viewer);
+        tvPlayMusicViewer = findViewById(R.id.tv_play_music_viewer);
+        tvPauseMusicViewer = findViewById(R.id.tv_pause_music_viewer);
     }
 
     private boolean isMusicGloballyEnabled() {
@@ -92,7 +83,7 @@ public class PhotoViewerActivity extends BaseActivity {
 
     private void setupClickListeners() {
         btnCloseViewer.setOnClickListener(v -> finish());
-        btnDeletePhoto.setOnClickListener(v -> {
+        tvDeletePhoto.setOnClickListener(v -> {
             if (memoryId != -1 && currentUserId != -1) {
                 showDeleteConfirmationDialog();
             } else {
@@ -100,7 +91,7 @@ public class PhotoViewerActivity extends BaseActivity {
             }
         });
 
-        btnPlayMusicViewer.setOnClickListener(v -> {
+        tvPlayMusicViewer.setOnClickListener(v -> {
             if (canPlayMusicForThisMemory() && musicManager != null) {
                 if (!musicManager.isPrepared() || (musicManager.getCurrentTrackUri() != null && !musicManager.getCurrentTrackUri().equals(musicUri)) ) {
                     musicManager.initializePlayer(PhotoViewerActivity.this, musicUri);
@@ -119,7 +110,7 @@ public class PhotoViewerActivity extends BaseActivity {
             }
         });
 
-        btnPauseMusicViewer.setOnClickListener(v -> {
+        tvPauseMusicViewer.setOnClickListener(v -> {
             if (musicManager != null && musicManager.isPlaying()) {
                 musicManager.pauseMusic();
                 updateMusicPlaybackControls(false);
@@ -184,7 +175,7 @@ public class PhotoViewerActivity extends BaseActivity {
                 try {
                     musicUri = Uri.parse(musicUriString);
                 } catch (Exception e) {
-                    musicUri = null; // Ensure musicUri is null if parsing fails
+                    musicUri = null; // Ensure musicUri is null
                     HelperMethods.showToast(this, getString(R.string.loading_music_error));
                 }
             } else {
@@ -210,13 +201,13 @@ public class PhotoViewerActivity extends BaseActivity {
                 }
             } else {
                 // Music not allowed or no music URI for this memory
-                if (musicManager != null && musicUri != null && musicManager.getCurrentTrackUri() != null && musicManager.getCurrentTrackUri().equals(musicUri) && musicManager.isPlaying()) {
+                if (musicManager != null && musicManager.getCurrentTrackUri() != null && musicManager.getCurrentTrackUri().equals(musicUri) && musicManager.isPlaying()) {
                     musicManager.pauseMusic(); // Pause if it was playing for this specific memory
                 }
-                updateMusicPlaybackControls(false); // This will hide controls
+                updateMusicPlaybackControls(false);
             }
 
-            btnDeletePhoto.setEnabled(memoryId != -1 && currentUserId != -1);
+            tvDeletePhoto.setEnabled(memoryId != -1 && currentUserId != -1);
 
         } else {
             HelperMethods.showToast(this, getString(R.string.error_no_data_received));
@@ -232,22 +223,20 @@ public class PhotoViewerActivity extends BaseActivity {
 
         llMusicPlaybackControlsViewer.setVisibility(View.VISIBLE);
         if (isPlaying) {
-            btnPlayMusicViewer.setVisibility(View.GONE);
-            btnPauseMusicViewer.setVisibility(View.VISIBLE);
+            tvPlayMusicViewer.setVisibility(View.GONE);
+            tvPauseMusicViewer.setVisibility(View.VISIBLE);
         } else {
-            btnPlayMusicViewer.setVisibility(View.VISIBLE);
-            btnPauseMusicViewer.setVisibility(View.GONE);
+            tvPlayMusicViewer.setVisibility(View.VISIBLE);
+            tvPauseMusicViewer.setVisibility(View.GONE);
         }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        // Pause music only if it's currently playing for *this* memory's track
-        if (musicManager != null && musicUri != null &&
-            musicManager.getCurrentTrackUri() != null &&
-            musicManager.getCurrentTrackUri().equals(musicUri) &&
-            musicManager.isPlaying() && !isFinishing()) {
+        if (musicManager != null && musicManager.getCurrentTrackUri() != null &&
+                musicManager.getCurrentTrackUri().equals(musicUri) &&
+                musicManager.isPlaying() && !isFinishing()) {
             musicManager.pauseMusic();
             updateMusicPlaybackControls(false);
         }
@@ -257,7 +246,6 @@ public class PhotoViewerActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         if (canPlayMusicForThisMemory() && musicManager != null) {
-            // If the player is prepared for the current track and was paused, resume it.
             if (musicManager.isPrepared() &&
                 musicManager.getCurrentTrackUri() != null &&
                 musicManager.getCurrentTrackUri().equals(musicUri) &&
@@ -267,21 +255,16 @@ public class PhotoViewerActivity extends BaseActivity {
             } else if (musicManager.isPlaying() &&
                        musicManager.getCurrentTrackUri() != null &&
                        musicManager.getCurrentTrackUri().equals(musicUri)) {
-                updateMusicPlaybackControls(true); // Ensure controls are correct if already playing our track
+                updateMusicPlaybackControls(true);
             } else if (musicManager.getCurrentTrackUri() == null || !musicManager.getCurrentTrackUri().equals(musicUri) || !musicManager.isPrepared()){
-                // If a different track is loaded, or not prepared for our track,
-                // loadPhotoData's auto-play logic might re-initialize if needed, or user can press play.
-                // For now, just ensure controls are in a consistent state (e.g., play shown).
                 updateMusicPlaybackControls(false);
             } else {
-                 updateMusicPlaybackControls(false); // Default to paused state if not actively playing our track
+                 updateMusicPlaybackControls(false);
             }
         } else {
-            // Music not allowed for this memory, ensure controls are hidden and music is paused if it's ours
-             if (musicManager != null && musicUri != null &&
-                musicManager.getCurrentTrackUri() != null &&
-                musicManager.getCurrentTrackUri().equals(musicUri) &&
-                musicManager.isPlaying()) {
+             if (musicManager != null && musicManager.getCurrentTrackUri() != null &&
+                     musicManager.getCurrentTrackUri().equals(musicUri) &&
+                     musicManager.isPlaying()) {
                 musicManager.pauseMusic();
             }
             updateMusicPlaybackControls(false);
@@ -291,28 +274,12 @@ public class PhotoViewerActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        // Release player only if it was playing the track for this specific PhotoViewerActivity instance
-        // or if the activity is finishing (to ensure cleanup).
         if (musicManager != null) {
             if (musicUri != null && musicManager.getCurrentTrackUri() != null && musicUri.equals(musicManager.getCurrentTrackUri())) {
-                 musicManager.releasePlayer(); // Release if it's our track
-            } else if (isFinishing() && musicManager.getCurrentTrackUri() == null){
-                // If finishing and no specific track is associated with musicManager (e.g. it was never initialized for this viewer)
-                // it might be an edge case, but generally, releasePlayer in onDestroy is for the *current* context.
-                // If another activity is managing a different track, this could be problematic.
-                // A better approach would be for MusicManager to perhaps have a ref count or more sophisticated track management if used globally.
-                // For this activity, only release if it's "our" player instance/track.
-                // The current MusicManager is a singleton, so releasing it here might affect other parts if not handled carefully.
-                // Let's assume for now the intention is to stop/release the specific track associated with this viewer.
-                // The existing logic already checks musicUri.equals(musicManager.getCurrentTrackUri())
-                // If it's finishing and it IS our track, it's covered by the first condition.
-                // If it's finishing and it's NOT our track, we should NOT release it here.
+                musicManager.releasePlayer();
+            } else {
+                isFinishing();
             }
-             // If we are finishing and the music manager is playing *our* track, the first condition handles it.
-            // If we are finishing and the music manager is playing *another* track, we should not release it.
-            // If we are finishing and the music manager is not playing, but holds *our* track, first condition handles it.
-            // The `else if (isFinishing())` in original code was too broad.
-            // We only care about releasing if it's *our* music that needs cleanup.
         }
     }
 }

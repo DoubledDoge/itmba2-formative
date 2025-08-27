@@ -24,7 +24,7 @@
             android:scaleType="centerCrop"
             android:background="@color/medium_text" />
 
-        <!-- Optional gradient overlay for better text visibility -->
+        <!-- Optional gradient overlay (I added just for a nice effect) -->
         <View
             android:layout_width="match_parent"
             android:layout_height="60dp"
