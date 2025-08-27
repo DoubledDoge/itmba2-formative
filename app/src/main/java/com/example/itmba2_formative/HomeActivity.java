@@ -14,8 +14,8 @@ import com.example.itmba2_formative.models.User;
 public class HomeActivity extends BaseActivity {
 
     // UI Components
-    private TextView tvUserName, tvTesScore, tvProfile;
-    private CardView cvMemories, cvGallery, cvBudget, cvDatabase, cvTesScore;
+    private TextView tvUserName, tvProfile;
+    private CardView cvMemories, cvGallery, cvBudget, cvDatabase;
 
     // Database and Session Management
     private DatabaseHelper dbHelper;
@@ -65,7 +65,6 @@ public class HomeActivity extends BaseActivity {
     private void initializeViews() {
         // Text views
         tvUserName = findViewById(R.id.tv_user_name);
-        tvTesScore = findViewById(R.id.tv_tes_score);
         tvProfile = findViewById(R.id.tv_profile);
 
         // Feature cards
@@ -73,52 +72,23 @@ public class HomeActivity extends BaseActivity {
         cvGallery = findViewById(R.id.cv_gallery);
         cvBudget = findViewById(R.id.cv_budget);
         cvDatabase = findViewById(R.id.cv_database);
-        cvTesScore = findViewById(R.id.cv_tes_score);
     }
 
     private void loadUserData() {
         User currentUser = sessionManager.getLoggedInUser();
         if (currentUser != null) {
             tvUserName.setText(currentUser.getFullName());
-            HelperMethods.setUserName(this, currentUser.getFullName());
+            // HelperMethods.setUserName(this, currentUser.getFullName()); // This might be redundant if sessionManager handles it
         }
-
-        int tesScore = HelperMethods.getCurrentTesScore(this);
-        tvTesScore.setText(String.valueOf(tesScore));
     }
 
     private void setupClickListeners() {
-
         tvProfile.setOnClickListener(v -> showProfileMenu());
 
-        cvMemories.setOnClickListener(v -> handleFeatureClick(
-                MemoryActivity.class,
-                AppConstants.TesScore.MEMORY_ENTRY
-        ));
-
-        cvGallery.setOnClickListener(v -> handleFeatureClick(
-                GalleryActivity.class,
-                AppConstants.TesScore.GALLERY_INTERACTION
-        ));
-
-        cvBudget.setOnClickListener(v -> handleFeatureClick(
-                BudgetActivity.class,
-                AppConstants.TesScore.NEW_TRIP
-        ));
-
+        cvMemories.setOnClickListener(v -> navigateToActivity(MemoryActivity.class));
+        cvGallery.setOnClickListener(v -> navigateToActivity(GalleryActivity.class));
+        cvBudget.setOnClickListener(v -> navigateToActivity(BudgetActivity.class));
         cvDatabase.setOnClickListener(v -> navigateToActivity(DatabaseActivity.class));
-        cvTesScore.setOnClickListener(v -> showTesScoreBreakdown());
-    }
-
-    private void handleFeatureClick(Class<?> activityClass, int tesPoints) {
-        HelperMethods.addTesPointsWithFeedback(this, tesPoints);
-        updateTesScoreDisplay();
-        navigateToActivity(activityClass);
-    }
-
-    private void updateTesScoreDisplay() {
-        int currentScore = HelperMethods.getCurrentTesScore(this);
-        tvTesScore.setText(String.valueOf(currentScore));
     }
 
     private void showProfileMenu() {
@@ -169,21 +139,6 @@ public class HomeActivity extends BaseActivity {
         }
     }
 
-    /**
-     * Show TES score breakdown dialog using helper methods
-     */
-    private void showTesScoreBreakdown() {
-        User currentUser = sessionManager.getLoggedInUser();
-        int memoryCount = 0;
-
-        if (currentUser != null) {
-            memoryCount = dbHelper.getUserMemoryCount(currentUser.getUserId());
-        }
-
-        String breakdownMessage = HelperMethods.getTesScoreBreakdown(this, memoryCount);
-        HelperMethods.showAlert(this, "TripBuddy Engagement Score", breakdownMessage);
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -191,7 +146,7 @@ public class HomeActivity extends BaseActivity {
         if (invalidateUserSession()) {
             return;
         }
-
+        // Reload user data in case name changed or other relevant info
         loadUserData();
     }
 }

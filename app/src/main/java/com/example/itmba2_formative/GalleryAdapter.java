@@ -1,13 +1,16 @@
 package com.example.itmba2_formative;
 
+import androidx.recyclerview.widget.DiffUtil;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.itmba2_formative.models.Memory;
 import java.util.List;
+import java.util.Objects;
 
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryViewHolder> {
     private final List<Memory> memories;
@@ -55,9 +58,6 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryV
         holder.itemView.setOnClickListener(v -> {
             if (listener != null) {
                 listener.onItemClick(memory);
-
-                // Award TES points for gallery interaction
-                HelperMethods.updateTesScore(v.getContext(), AppConstants.TesScore.GALLERY_INTERACTION);
             }
         });
 
@@ -71,13 +71,14 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryV
         return memories.size();
     }
 
-    /**
-     * Update the adapter with new memories data
-     */
     public void updateMemories(List<Memory> newMemories) {
-        memories.clear();
-        memories.addAll(newMemories);
-        notifyDataSetChanged();
+        MemoryDiffCallback diffCallback = new MemoryDiffCallback(this.memories, newMemories);
+        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallback);
+
+        this.memories.clear();
+        this.memories.addAll(newMemories);
+
+        diffResult.dispatchUpdatesTo(this);
     }
 
     public static class GalleryViewHolder extends RecyclerView.ViewHolder {
@@ -86,6 +87,54 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryV
         GalleryViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.iv_gallery_item);
+        }
+    }
+
+    private static class MemoryDiffCallback extends DiffUtil.Callback {
+        private final List<Memory> oldList;
+        private final List<Memory> newList;
+
+        MemoryDiffCallback(List<Memory> oldList, List<Memory> newList) {
+            this.oldList = oldList;
+            this.newList = newList;
+        }
+
+        @Override
+        public int getOldListSize() {
+            return oldList.size();
+        }
+
+        @Override
+        public int getNewListSize() {
+            return newList.size();
+        }
+
+        @Override
+        public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
+            Memory oldMemory = oldList.get(oldItemPosition);
+            Memory newMemory = newList.get(newItemPosition);
+
+            if (oldMemory.getPhotoUri() != null && newMemory.getPhotoUri() != null) {
+                return oldMemory.getPhotoUri().equals(newMemory.getPhotoUri());
+            }
+
+            if (oldMemory.getPhotoUri() == null && newMemory.getPhotoUri() == null) {
+                return oldMemory.equals(newMemory);
+            }
+            return false;
+        }
+
+        @Override
+        public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
+            Memory oldMemory = oldList.get(oldItemPosition);
+            Memory newMemory = newList.get(newItemPosition);
+            return Objects.equals(oldMemory, newMemory);
+        }
+
+        @Nullable
+        @Override
+        public Object getChangePayload(int oldItemPosition, int newItemPosition) {
+            return super.getChangePayload(oldItemPosition, newItemPosition);
         }
     }
 }

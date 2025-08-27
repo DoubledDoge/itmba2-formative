@@ -1,7 +1,24 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.Itmba2formative" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+    <!-- Base application theme for Dark Mode -->
+    <style name="Theme.Itmba2formative" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Primary brand color -->
+        <item name="colorPrimary">@color/dark_mode_primary</item>
+        <item name="colorOnPrimary">@color/dark_mode_onPrimary</item>
+
+        <!-- Secondary brand color -->
+        <item name="colorSecondary">@color/dark_mode_secondary</item>
+        <item name="colorOnSecondary">@color/dark_mode_onSecondary</item>
+
+        <!-- Background colors -->
+        <item name="android:colorBackground">@color/dark_mode_background</item>
+        <item name="colorSurface">@color/dark_mode_surface</item>
+        <item name="colorOnBackground">@color/dark_mode_onSurface</item>
+        <item name="colorOnSurface">@color/dark_mode_onSurface</item>
+
+        <!-- Status bar -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <!-- For dark themes, status bar icons should be light -->
+        <item name="android:windowLightStatusBar" >false</item>
+        <item name="android:windowTranslucentStatus">true</item>
     </style>
 </resources>

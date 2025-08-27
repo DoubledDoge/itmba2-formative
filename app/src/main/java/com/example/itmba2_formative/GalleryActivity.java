@@ -162,25 +162,18 @@ public class GalleryActivity extends BaseActivity {
     }
 
     private void onPhotoClick(Memory memory) {
-        // Award TES points for gallery interaction
-        HelperMethods.addTesPointsWithFeedback(this, AppConstants.TesScore.GALLERY_INTERACTION);
-
-        // Launch PhotoViewerActivity with memory data
         Intent intent = new Intent(this, PhotoViewerActivity.class);
+
+        // Pass memory data to photo viewer
         intent.putExtra("memory_id", memory.getId());
-        intent.putExtra("memory_title", memory.getTitle());
-        intent.putExtra("memory_description", memory.getDescription());
-        intent.putExtra("memory_location", memory.getLocation());
-
         if (memory.getPhotoUri() != null) {
-            intent.putExtra("memory_photo_uri", memory.getPhotoUri().toString());
+            intent.putExtra("music_uri", memory.getMusicUri().toString());
+            intent.putExtra("photo_uri", memory.getPhotoUri().toString());
         }
-
-        if (memory.getMusicUri() != null) {
-            intent.putExtra("memory_music_uri", memory.getMusicUri().toString());
-        }
+        intent.putExtra("title", memory.getTitle());
+        intent.putExtra("description", memory.getDescription());
+        intent.putExtra("location", memory.getLocation());
 
         startActivity(intent);
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 }

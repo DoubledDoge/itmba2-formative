@@ -278,4 +278,51 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return "Users: " + userCount + ", Memories: " + memoryCount;
     }
+
+    /**
+     * Retrieves all data from specified tables and formats it as a string for debugging.
+     * @return A string containing all data from the users and memories tables.
+     */
+    public String getDebugDatabaseDump() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        StringBuilder dump = new StringBuilder();
+
+        // Dump Users Table
+        dump.append("--- ").append(TABLE_USERS).append(" Table ---\n");
+        Cursor userCursor = db.rawQuery("SELECT * FROM " + TABLE_USERS, null);
+        if (userCursor.moveToFirst()) {
+            String[] columnNames = userCursor.getColumnNames();
+            dump.append(String.join(" | ", columnNames)).append("\n");
+            do {
+                for (int i = 0; i < userCursor.getColumnCount(); i++) {
+                    dump.append(userCursor.getString(i)).append(i == userCursor.getColumnCount() - 1 ? "" : " | ");
+                }
+                dump.append("\n");
+            } while (userCursor.moveToNext());
+        } else {
+            dump.append("No data in ").append(TABLE_USERS).append(" table.\n");
+        }
+        userCursor.close();
+        dump.append("\n");
+
+        // Dump Memories Table
+        dump.append("--- ").append(TABLE_MEMORIES).append(" Table ---\n");
+        Cursor memoryCursor = db.rawQuery("SELECT * FROM " + TABLE_MEMORIES, null);
+        if (memoryCursor.moveToFirst()) {
+            String[] columnNames = memoryCursor.getColumnNames();
+            dump.append(String.join(" | ", columnNames)).append("\n");
+            do {
+                for (int i = 0; i < memoryCursor.getColumnCount(); i++) {
+                    dump.append(memoryCursor.getString(i)).append(i == memoryCursor.getColumnCount() - 1 ? "" : " | ");
+                }
+                dump.append("\n");
+            } while (memoryCursor.moveToNext());
+        } else {
+            dump.append("No data in ").append(TABLE_MEMORIES).append(" table.\n");
+        }
+        memoryCursor.close();
+
+        db.close();
+        return dump.toString();
+    }
 }

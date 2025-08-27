@@ -28,5 +28,13 @@
     <!-- Gradient Colors (for drawable backgrounds) -->
     <color name="gradient_start">#1976D2</color>        <!-- Deep blue -->
     <color name="gradient_middle">#2196F3</color>       <!-- Primary blue -->
-    <color name="gradient_end">#42A5F5</color>          <!-- Light blue -->
+    <color name="gradient_end">#42A5F5</color>
+    <!-- Dark Mode Specific Colors -->
+    <color name="dark_mode_primary">#FF6B35</color> <!-- Example: Your primary orange -->
+    <color name="dark_mode_onPrimary">#FFFFFF</color>
+    <color name="dark_mode_secondary">#FF8A50</color> <!-- Example: A lighter orange -->
+    <color name="dark_mode_onSecondary">#000000</color>
+    <color name="dark_mode_background">#121212</color> <!-- Common dark background -->
+    <color name="dark_mode_surface">#1E1E1E</color>   <!-- Slightly lighter than background for cards -->
+    <color name="dark_mode_onSurface">#FFFFFF</color>          <!-- Light blue -->
 </resources>

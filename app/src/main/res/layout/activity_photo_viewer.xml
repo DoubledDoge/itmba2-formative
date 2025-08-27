@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/photo_viewer_coordinator"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black">
 
-    <!-- Photo View -->
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/vp_photo_viewer"
+    <!-- Main Photo View -->
+    <ImageView
+        android:id="@+id/iv_photo_viewer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:scaleType="centerInside"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/memory_photo" />
 
     <!-- Top Controls -->
     <LinearLayout
@@ -46,24 +48,41 @@
             android:maxLines="1"
             android:ellipsize="end" />
 
+        <TextView
+            android:id="@+id/btn_delete_photo"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/delete_icon"
+            android:textSize="24sp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:layout_marginStart="8dp"/>
+
     </LinearLayout>
 
-    <!-- Bottom Controls -->
+    <!-- Bottom Controls (Simplified) -->
     <LinearLayout
         android:id="@+id/ll_bottom_controls"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:padding="16dp"
-        android:background="@drawable/gradient_bottom">
+        android:background="@drawable/gradient_bottom"
+        android:baselineAligned="false"
+        android:gravity="center_vertical">
 
-        <!-- Memory Details -->
+        <!-- Memory Details Container -->
         <LinearLayout
-            android:layout_width="match_parent"
+            android:id="@+id/ll_memory_details_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:orientation="vertical"
-            android:layout_marginBottom="16dp">
+            android:layout_marginEnd="8dp">
 
             <TextView
                 android:id="@+id/tv_photo_description"
@@ -71,17 +90,16 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:textSize="14sp"
-                android:maxLines="2"
+                android:maxLines="3"
                 android:ellipsize="end" />
 
             <TextView
                 android:id="@+id/tv_photo_location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="8dp"
                 android:textColor="@color/white_80"
                 android:textSize="12sp"
-                android:drawableStart="@null"
                 android:drawablePadding="4dp"
                 android:gravity="center_vertical" />
 
@@ -95,40 +113,41 @@
 
         </LinearLayout>
 
-        <!-- Music Controls -->
+        <!-- Music Playback Controls -->
         <LinearLayout
-            android:id="@+id/ll_music_controls"
-            android:layout_width="match_parent"
+            android:id="@+id/ll_music_playback_controls_viewer"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
             android:visibility="gone">
 
             <TextView
-                android:id="@+id/tv_track_info"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textColor="@color/white"
-                android:textSize="14sp"
-                android:maxLines="1"
-                android:ellipsize="end" />
-
-            <TextView
-                android:id="@+id/btn_play_music"
+                android:id="@+id/btn_play_music_viewer"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:layout_marginStart="8dp"
-                android:background="@drawable/rounded_button_transparent"
-                android:text="@string/play_icon"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:gravity="center"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
-                android:focusable="true" />
+                android:focusable="true"
+                android:text="@string/play_icon"
+                android:textSize="24sp"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:visibility="gone"/>
 
+            <TextView
+                android:id="@+id/btn_pause_music_viewer"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/pause_icon"
+                android:textSize="24sp"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:visibility="visible"/>
         </LinearLayout>
-
     </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

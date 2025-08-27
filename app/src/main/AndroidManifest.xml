@@ -63,9 +63,6 @@
             android:theme="@style/Theme.TripBuddy.NoActionBar"
             android:parentActivityName=".HomeActivity"
             android:configChanges="orientation|screenSize|keyboardHidden">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".HomeActivity" />
         </activity>
 
         <!-- Gallery View Activity -->
@@ -74,10 +71,11 @@
             android:exported="false"
             android:theme="@style/Theme.TripBuddy.NoActionBar"
             android:parentActivityName=".HomeActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".HomeActivity" />
         </activity>
+
+        <!-- Photo Viewer Activity -->
+        <activity android:name=".PhotoViewerActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <!-- Budget/Trip Planning Activity -->
         <activity
@@ -96,9 +94,6 @@
             android:exported="false"
             android:theme="@style/Theme.TripBuddy.NoActionBar"
             android:parentActivityName=".HomeActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".HomeActivity" />
         </activity>
 
         <!-- Profile/Settings Activity -->
@@ -107,9 +102,6 @@
             android:exported="false"
             android:theme="@style/Theme.TripBuddy.NoActionBar"
             android:parentActivityName=".HomeActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".HomeActivity" />
         </activity>
 
         <!-- File Provider for Camera and Image handling -->

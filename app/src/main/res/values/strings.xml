@@ -26,6 +26,8 @@
     <string name="retake_photo">Retake photo</string>
     <string name="remove_photo">Remove photo</string>
     <string name="quick_memory">Quick Memory</string>
+    <string name="untitled_memory">Untitled Memory</string>
+    <string name="no_description">No description available.</string>
     <!-- Gallery Feature -->
     <string name="gallery_feature">View Gallery</string>
     <string name="gallery_desc">Browse travel photos</string>
@@ -41,6 +43,12 @@
     <string name="database_feature">Database</string>
     <string name="debug_database">Debug Database</string>
     <string name="database_desc">View and manage data</string>
+    <!-- NEW: Debug/Database Activity Strings -->
+    <string name="debug_activity_title">Database Debug</string>
+    <string name="debug_raw_dump_title">Raw Database Contents</string>
+    <string name="debug_db_content_placeholder">Database content will appear here…</string>
+    <string name="loading_database">Loading database contents…</string>
+    <string name="no_database_data">No data found or error loading database content.</string>
 
     <!-- TES Feature -->
     <string name="rewards_feature">Loyalty Rewards</string>
@@ -63,27 +71,28 @@
     <string name="full_name_hint">Full Name</string>
 
     <!-- Icons -->
-    <string name="icon_email">📧</string>
-    <string name="icon_password">🔒</string>
-    <string name="icon_confirm_password">🔑</string>
-    <string name="icon_user">👤</string>
-    <string name="icon_camera">📷</string>
-    <string name="icon_map">🗺️</string>
-    <string name="icon_money">💰</string>
-    <string name="icon_star">⭐</string>
-    <string name="icon_gallery">🖼️</string>
-    <string name="icon_database">🗃️</string>
-    <string name="icon_preferences">⚙️</string>
-    <string name="icon_music">🎵</string>
-    <string name="icon_music2">🎶</string>
-    <string name="back_icon">←</string>
-    <string name="checkmark_icon">✓</string>
-    <string name="play_icon">▶</string>
-    <string name="pause_icon">⏸</string>
-    <string name="remove_track_icon">❌</string>
-    <string name="retry_icon">🔄</string>
-    <string name="bin_icon">🗑️</string>
-    <string name="stop_music_icon">⏹</string>
+    <string name="icon_email" translatable="false">📧</string>
+    <string name="icon_password" translatable="false">🔒</string>
+    <string name="icon_confirm_password" translatable="false">🔒</string>
+    <string name="icon_user" translatable="false">👤</string>
+    <string name="icon_camera" translatable="false">📷</string>
+    <string name="icon_map" translatable="false">🗺️</string>
+    <string name="icon_money" translatable="false">💰</string>
+    <string name="icon_star" translatable="false">⭐</string>
+    <string name="icon_gallery" translatable="false">🖼️</string>
+    <string name="icon_database" translatable="false">🗃️</string>
+    <string name="icon_preferences" translatable="false">⚙️</string>
+    <string name="icon_music" translatable="false">🎵</string>
+    <string name="icon_music2" translatable="false">🎶</string>
+    <string name="back_icon" translatable="false">←</string>
+    <string name="checkmark_icon" translatable="false">✓</string>
+    <string name="play_icon" translatable="false">▶</string>
+    <string name="pause_icon" translatable="false">⏸</string>
+    <string name="remove_track_icon" translatable="false">✕</string>
+    <string name="retry_icon" translatable="false">🔄</string>
+    <string name="bin_icon" translatable="false">🗑️</string>
+    <string name="stop_music_icon" translatable="false">⏹</string>
+    <string name="delete_icon" translatable="false">X</string>
 
     <!-- Action Buttons -->
     <string name="save_memory">Save Memory</string>
@@ -94,6 +103,7 @@
     <string name="stop_music">Stop Music</string>
     <string name="remove_track">Remove Track</string>
     <string name="create">Create</string>
+    <string name="delete">Delete</string>
 
     <!-- Music Related -->
     <string name="memory_soundtrack">Memory Soundtrack</string>
@@ -124,6 +134,13 @@
     <string name="action_discard">Discard</string>
     <string name="action_cancel">Cancel</string>
 
+    <!-- Memory Deletion -->
+    <string name="delete_memory_dialog_title">Delete Memory</string>
+    <string name="delete_memory_dialog_message">Are you sure you want to delete this memory?</string>
+    <string name="memory_deleted_successfully">Memory deleted successfully</string>
+    <string name="memory_delete_failed">Failed to delete memory</string>
+    <string name="error_memory_or_user_id_not_found">Error: Memory or User ID not found.</string>
+
     <!-- Success Messages -->
     <string name="account_created">Account created successfully</string>
     <string name="login_success">Logged in successfully</string>
@@ -134,6 +151,7 @@
     <string name="loading_register">Creating account…</string>
     <string name="loading_memory">Saving memory…</string>
     <string name="loading_gallery">Loading gallery…</string>
+    <string name="loading_photo_error">Error loading photo</string>
 
     <!-- Error Messages -->
     <string name="error_generic">An error occurred. Please try again.</string>
@@ -141,6 +159,18 @@
     <string name="database_error">Database error occurred</string>
     <string name="save_error">Error saving data</string>
     <string name="load_error">Error loading data</string>
+    <string name="error_no_data_received">Error: No data received.</string>
     <string name="permission_denied_photo_uri">Permission denied for photo. Please select the photo again.</string>
     <string name="permission_denied_music_uri">Permission denied for music. Please select the music track again.</string>
+    <string name="error_user_not_found">Error: User not found. Please log in again.</string>
+    <string name="loading_music_error">Error loading music.</string>
+
+
+    <!-- Settings -->
+    <string name="sound">Sound</string>
+    <string name="background_music">Background Music</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="appearance">Appearance</string>
+    <string name="language">Language</string>
+    <string name="english_uk">English (UK)</string>
 </resources>
