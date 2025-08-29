@@ -14,6 +14,7 @@
 
     <!-- Features -->
     <string name="explore_features">Explore Features</string>
+
     <!-- Memory Feature -->
     <string name="memories_feature">Create Memories</string>
     <string name="memories_desc">Capture your moments</string>
@@ -32,9 +33,11 @@
     <string name="gallery_feature">View Gallery</string>
     <string name="gallery_desc">Browse travel photos</string>
     <string name="album_art">Album Art</string>
+
     <!-- Budget Feature -->
     <string name="planning_feature">Plan Trip</string>
     <string name="budget_desc">Decide your adventure</string>
+
     <!-- Trip Planning -->
     <string name="location">Location</string>
     <string name="use_current_location">Use current location</string>
@@ -43,19 +46,13 @@
     <string name="database_feature">Database</string>
     <string name="debug_database">Debug Database</string>
     <string name="database_desc">View and manage data</string>
-    <!-- NEW: Debug/Database Activity Strings -->
+
+    <!-- Database Activity Strings -->
     <string name="debug_activity_title">Database Debug</string>
     <string name="debug_raw_dump_title">Raw Database Contents</string>
     <string name="debug_db_content_placeholder">Database content will appear here…</string>
     <string name="loading_database">Loading database contents…</string>
     <string name="no_database_data">No data found or error loading database content.</string>
-
-    <!-- TES Feature -->
-    <string name="rewards_feature">Loyalty Rewards</string>
-    <string name="tes_title">Travel Experience Score</string>
-    <string name="tes_subtitle">Keep traveling to increase your score!</string>
-    <string name="default_tes_score">127</string>
-    <string name="tes_icon_desc">TES Score Icon</string>
 
     <!-- Authentication -->
     <string name="auth_action_login">Sign In</string>
@@ -93,6 +90,7 @@
     <string name="bin_icon" translatable="false">🗑️</string>
     <string name="stop_music_icon" translatable="false">⏹</string>
     <string name="delete_icon" translatable="false">X</string>
+    <string name="add_icon" translatable="false">+</string>
 
     <!-- Action Buttons -->
     <string name="save_memory">Save Memory</string>
@@ -172,4 +170,63 @@
     <string name="appearance">Appearance</string>
     <string name="language">Language</string>
     <string name="english_uk">English (UK)</string>
+
+    <!-- Trip Details -->
+    <string name="trip_details_title">Trip Details</string>
+    <string name="destination_hint">Where are you going?</string>
+    <string name="start_date">Start Date</string>
+    <string name="end_date">End Date</string>
+    <string name="select_date">Select Date</string>
+    <string name="trip_notes_hint">Add notes about your trip (optional)</string>
+    <string name="number_travelers">Number of Travelers</string>
+
+    <!-- Activities -->
+    <string name="select_activities">Select Activities</string>
+    <string name="activity_sightseeing">Sightseeing</string>
+    <string name="sightseeing_desc">Explore landmarks and attractions</string>
+
+    <string name="activity_hiking">Hiking &amp; Nature</string>
+    <string name="hiking_desc">Outdoor adventures and trails</string>
+
+    <string name="activity_dining">Fine Dining</string>
+    <string name="dining_desc">Local restaurants and cuisine</string>
+
+    <string name="activity_museum">Museum Tours</string>
+    <string name="museum_desc">Cultural sites and exhibitions</string>
+
+    <string name="activity_shopping">Shopping</string>
+    <string name="shopping_desc">Local markets and souvenirs</string>
+
+    <!-- Custom Expenses -->
+    <string name="custom_expenses">Custom Expenses</string>
+    <string name="visa_fees">Visa Fees</string>
+    <string name="visa_fees_desc">Travel documentation costs</string>
+    <string name="transport">Transport</string>
+    <string name="transport_desc">Flights, trains, local transport</string>
+    <string name="accommodation">Accommodation</string>
+    <string name="accommodation_desc">Hotels, hostels, rentals</string>
+    <string name="insurance">Travel Insurance</string>
+    <string name="insurance_desc">Health and travel coverage</string>
+    <string name="amount_hint">0.00</string>
+    <string name="add_expense">Add Custom Expense</string>
+
+
+    <!-- Budget Summary -->
+    <string name="budget_summary">Budget Summary</string>
+    <string name="subtotal">Subtotal</string>
+    <string name="total">Total</string>
+    <string name="discount">Discount</string>
+    <string name="loyalty_discount">Loyalty Discount (10%)</string>
+    <string name="final_total">Final Total</string>
+    <string name="currency">R0.00</string>
+    <string name="discount_amount">-R0.00</string>
+    <string name="proceed">Proceed to payment</string>
+
+    <!-- Loyalty Status -->
+    <string name="loyalty_status_default">Complete 3+ trips to unlock loyalty discounts!</string>
+    <string name="loyalty_status_qualified">🎉 Loyalty member - 10% discount applied!</string>
+
+    <!-- Action Buttons -->
+    <string name="save_plan">Save Plan</string>
+    <string name="confirm_plan">Book Trip</string>
 </resources>

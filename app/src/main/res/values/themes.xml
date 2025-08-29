@@ -4,7 +4,7 @@
     <style name="Theme.Itmba2formative" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Primary brand color -->
         <item name="colorPrimary">@color/primary_color</item>
-        <item name="colorPrimaryVariant">@color/gradient_start</item>
+        <item name="colorPrimaryVariant">@color/background_gradient_start</item>
         <item name="colorOnPrimary">@color/white</item>
 
         <!-- Secondary brand color -->
@@ -13,7 +13,7 @@
         <item name="colorOnSecondary">@color/black</item>
 
         <!-- Background colors -->
-        <item name="android:colorBackground">@color/gradient_start</item>
+        <item name="android:colorBackground">@color/background_gradient_start</item>
         <item name="colorSurface">@color/card_background</item>
         <item name="colorOnSurface">@color/white</item>
 

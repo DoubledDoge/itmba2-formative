@@ -1,4 +1,4 @@
 package com.example.itmba2_formative;
 
-public class BudgetActivity {
+public class BudgetActivity extends BaseActivity {
 }

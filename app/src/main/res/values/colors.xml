@@ -26,16 +26,20 @@
     <color name="success_color">#4CAF50</color>
 
     <!-- Gradient Colors  -->
-    <color name="gradient_start">#1976D2</color>
-    <color name="gradient_middle">#2196F3</color>
-    <color name="gradient_end">#42A5F5</color>
+    <color name="background_gradient_start">#FF6B35</color>
+    <color name="background_gradient_middle">#FF8A50</color>
+    <color name="background_gradient_end">#FFD23F</color>
+    <color name="background_gradient_night_start">#0F2027</color>
+    <color name="background_gradient_night_middle">#203A43</color>
+    <color name="background_gradient_night_end">#2C5364</color>
+    <color name="gradient_overlay_start">#99000000</color>
+    <color name="gradient_overlay_end">#00000000</color>
 
     <!-- Dark Mode Specific Colors -->
     <color name="dark_mode_primary">#FF6B35</color>
     <color name="dark_mode_onPrimary">#FFFFFF</color>
     <color name="dark_mode_secondary">#FF8A50</color>
     <color name="dark_mode_onSecondary">#000000</color>
-    <color name="dark_mode_background">#121212</color>
     <color name="dark_mode_surface">#1E1E1E</color>
     <color name="dark_mode_onSurface">#FFFFFF</color>
 </resources>
