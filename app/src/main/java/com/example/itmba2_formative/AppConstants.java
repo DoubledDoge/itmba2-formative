@@ -15,6 +15,7 @@ public final class AppConstants {
         public static final String PREF_APP_THEME = "appTheme";
         public static final String PREF_BACKGROUND_MUSIC = "backgroundMusicEnabled";
         public static final String PREF_APP_LANGUAGE = "appLanguage"; // Unused since I'm not translating this app
+        public static final String PREF_TRIP_COUNT = "tripCount";
     }
 
     public static final class ThemeOptions {
@@ -27,5 +28,17 @@ public final class AppConstants {
         public static final int MAX_PASSWORD_LENGTH = 128;
         public static final int MIN_FULL_NAME_LENGTH = 2;
         public static final int MAX_FULL_NAME_LENGTH = 50;
+    }
+
+    public static final class TripConstants {
+        public static final int LOYALTY_DISCOUNT_THRESHOLD = 3;
+        public static final double LOYALTY_DISCOUNT_PERCENTAGE = 0.10; // 10%
+
+        // Predefined activity costs
+        public static final double SIGHTSEEING_COST = 150.0;
+        public static final double HIKING_COST = 75.0;
+        public static final double DINING_COST = 200.0;
+        public static final double MUSEUM_COST = 100.0;
+        public static final double SHOPPING_COST = 125.0;
     }
 }

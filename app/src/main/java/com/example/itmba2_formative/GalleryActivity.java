@@ -155,7 +155,7 @@ public class GalleryActivity extends BaseActivity {
         Intent intent = new Intent(this, PhotoViewerActivity.class);
 
         // Pass memory data to photo viewer
-        intent.putExtra("memory_id", memory.getId());
+        intent.putExtra("memory_id", memory.getMemoryId());
         if (memory.getPhotoUri() != null) {
             intent.putExtra("music_uri", memory.getMusicUri().toString());
             intent.putExtra("photo_uri", memory.getPhotoUri().toString());

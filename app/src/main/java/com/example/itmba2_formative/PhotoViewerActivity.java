@@ -41,7 +41,7 @@ public class PhotoViewerActivity extends BaseActivity {
         if (currentUser != null) {
             currentUserId = currentUser.getUserId();
         } else {
-            HelperMethods.showToast(this, getString(R.string.error_user_not_found));
+            HelperMethods.showToast(this, getString(R.string.user_not_found));
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.photo_viewer_coordinator), (view, insets) -> {
@@ -210,7 +210,7 @@ public class PhotoViewerActivity extends BaseActivity {
             tvDeletePhoto.setEnabled(memoryId != -1 && currentUserId != -1);
 
         } else {
-            HelperMethods.showToast(this, getString(R.string.error_no_data_received));
+            HelperMethods.showToast(this, getString(R.string.no_data_received));
             finish();
         }
     }

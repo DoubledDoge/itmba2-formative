@@ -2,7 +2,7 @@
 <resources>
     <!-- App Information -->
     <string name="app_name">TripBuddy</string>
-    <string name="app_tagline">Document • Plan • Explore</string>
+    <string name="app_tagline">Document | Plan | Explore</string>
 
     <!-- Welcome Screen -->
     <string name="welcome_message">Your ultimate travel companion for creating memories and planning adventures</string>
@@ -57,8 +57,8 @@
     <!-- Authentication -->
     <string name="auth_action_login">Sign In</string>
     <string name="auth_action_register">Create Account</string>
-    <string name="auth_switch_to_login">Already have an account? Sign in</string>
-    <string name="join_message">Join the TripBuddy community</string>
+    <string name="auth_switch_to_login">Already have an account?</string>
+    <string name="join_message">Join the TripBuddy community today!</string>
     <string name="forgot_password">Forgot Password?</string>
 
     <!-- Form Fields -->
@@ -90,7 +90,6 @@
     <string name="bin_icon" translatable="false">🗑️</string>
     <string name="stop_music_icon" translatable="false">⏹</string>
     <string name="delete_icon" translatable="false">X</string>
-    <string name="add_icon" translatable="false">+</string>
 
     <!-- Action Buttons -->
     <string name="save_memory">Save Memory</string>
@@ -102,6 +101,9 @@
     <string name="remove_track">Remove Track</string>
     <string name="create">Create</string>
     <string name="delete">Delete</string>
+    <string name="save_trip">Save Trip</string>
+    <string name="load_trip">Load Trip</string>
+    <string name="save_plan">Save Plan</string>
 
     <!-- Music Related -->
     <string name="memory_soundtrack">Memory Soundtrack</string>
@@ -157,10 +159,10 @@
     <string name="database_error">Database error occurred</string>
     <string name="save_error">Error saving data</string>
     <string name="load_error">Error loading data</string>
-    <string name="error_no_data_received">Error: No data received.</string>
-    <string name="permission_denied_photo_uri">Permission denied for photo. Please select the photo again.</string>
-    <string name="permission_denied_music_uri">Permission denied for music. Please select the music track again.</string>
-    <string name="error_user_not_found">Error: User not found. Please log in again.</string>
+    <string name="no_data_received">No data received.</string>
+    <string name="permission_denied_photo_uri">Permission denied for photo.</string>
+    <string name="permission_denied_music_uri">Permission denied for music.</string>
+    <string name="user_not_found">User not found. Please log in again.</string>
     <string name="loading_music_error">Error loading music.</string>
 
     <!-- Settings -->
@@ -189,7 +191,7 @@
     <string name="hiking_desc">Outdoor adventures and trails</string>
 
     <string name="activity_dining">Fine Dining</string>
-    <string name="dining_desc">Local restaurants and cuisine</string>
+    <string name="dining_desc">Local restaurants and food</string>
 
     <string name="activity_museum">Museum Tours</string>
     <string name="museum_desc">Cultural sites and exhibitions</string>
@@ -212,7 +214,7 @@
 
 
     <!-- Budget Summary -->
-    <string name="budget_summary">Budget Summary</string>
+    <string name="summary">Summary</string>
     <string name="subtotal">Subtotal</string>
     <string name="total">Total</string>
     <string name="discount">Discount</string>
@@ -220,13 +222,10 @@
     <string name="final_total">Final Total</string>
     <string name="currency">R0.00</string>
     <string name="discount_amount">-R0.00</string>
-    <string name="proceed">Proceed to payment</string>
 
     <!-- Loyalty Status -->
     <string name="loyalty_status_default">Complete 3+ trips to unlock loyalty discounts!</string>
-    <string name="loyalty_status_qualified">🎉 Loyalty member - 10% discount applied!</string>
+    <string name="loyalty_status_qualified">🎉 Loyalty member! 10% discount applied!</string>
 
-    <!-- Action Buttons -->
-    <string name="save_plan">Save Plan</string>
-    <string name="confirm_plan">Book Trip</string>
+
 </resources>
